@@ -1,0 +1,148 @@
+﻿@page "/courts"
+
+@using Models
+@using Utils.Tokens
+@inject Services.DataService Data
+
+<div class="courts-screen">
+    <div class="app-bar">
+        <div class="app-bar-left">
+            <button class="back-btn" @onclick="NavigateBack" aria-label="Back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+            <div class="title-section">
+                <span class="screen-title">Courts</span>
+                <span class="location-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Jakarta & Tangerang
+                </span>
+            </div>
+        </div>
+        <button class="filter-btn" aria-label="Filter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14" />
+                <line x1="4" y1="10" x2="4" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12" y2="3" />
+                <line x1="20" y1="21" x2="20" y2="16" />
+                <line x1="20" y1="12" x2="20" y2="3" />
+                <line x1="1" y1="14" x2="7" y2="14" />
+                <line x1="9" y1="8" x2="15" y2="8" />
+                <line x1="17" y1="16" x2="23" y2="16" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Filter Chips -->
+    <div class="filter-chips">
+        @foreach (var filter in Filters)
+        {
+            <button class="chip @(SelectedFilter == filter.Key ? "active" : "")"
+                    @onclick="() => SelectedFilter = filter.Key">
+                @filter.Label
+            </button>
+        }
+    </div>
+
+    <div class="courts-list">
+        @foreach (var court in FilteredCourts)
+        {
+            <div class="court-card">
+               <div class="court-header">
+                    <span class="availability-dot @(court.IsAvailable ? "available" : "unavailable")">
+                        @(court.IsAvailable ? "Available" : "Full")
+                    </span>
+                    <div class="court-image-wrapper">
+                    <img src="Images/Padel.png" alt="Padel Court" class="court-image" />
+                </div>
+                <div class="court-title">
+                    <div class="court-name-row">
+                        <h3>@court.Name</h3>
+                        <span class="court-type" style="color: @court.Color">@court.Type</span>
+                    </div>
+                </div>
+            </div>
+                
+                <!-- Court Location -->
+                <div class="court-location">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <span>@court.Location</span>
+                </div>
+                
+                <!-- Specs -->
+                <div class="specs">
+                    <div class="spec-item">
+                        <span class="spec-icon">📐</span>
+                        <span>@court.Size</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-icon">🏟️</span>
+                        <span>@court.Surface</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-icon">💡</span>
+                        <span>@court.Lighting</span>
+                    </div>
+                </div>
+                
+                <!-- Amenities -->
+                <div class="amenities">
+                    @foreach (var amenity in court.Amenities)
+                    {
+                        <span class="amenity-pill">@amenity</span>
+                    }
+                </div>
+                
+                <!-- Court Footer -->
+                <div class="court-footer">
+                    <div class="price-section">
+                        <span class="price">@Formatter.FormatCurrency(court.Price)</span>
+                        <span class="price-period">/hr</span>
+                    </div>
+                    <StatusDot Status="@(court.IsAvailable ? "Available" : "Full")" />
+                </div>
+            </div>
+        }
+        
+        <!-- Empty State -->
+        @if (!FilteredCourts.Any())
+        {
+            <div class="empty-state">
+                <span class="emoji">😕</span>
+                <h3>No courts found</h3>
+                <p>Try adjusting your filters</p>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback<string> OnNavigate { get; set; }
+    
+    private string SelectedFilter = "all";
+    private List<Court> FilteredCourts => SelectedFilter == "all" 
+        ? Data.CourtsHome
+        : Data.CourtsHome.Where(c => c.Categories.Contains(SelectedFilter)).ToList();
+    
+    private List<(string Key, string Label)> Filters = new()
+    {
+        ("all", "All"),
+        ("Indoor", "Indoor"),
+        ("Outdoor", "Outdoor"),
+        ("Glass Wall", "Glass Wall"),
+        ("Premium", "Premium")
+    };
+
+    private void NavigateBack()
+    {
+        OnNavigate.InvokeAsync("home");
+    }
+}

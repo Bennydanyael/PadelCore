@@ -1,0 +1,51 @@
+.pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 14px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    height: 24px;
+    line-height: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+    .pill.active {
+        background: rgba(34, 211, 238, 0.12);
+        color: #22D3EE;
+        border: 1px solid rgba(34, 211, 238, 0.25);
+        animation: pulse-pill 2.5s ease-in-out infinite;
+    }
+
+    .pill.confirmed {
+        background: rgba(34, 197, 94, 0.12);
+        color: #22C55E;
+        border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    .pill.cancelled {
+        background: rgba(239, 68, 68, 0.12);
+        color: #EF4444;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+    }
+
+    .pill.past {
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+/* Animation for Active pill */
+@keyframes pulse-pill {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 0 0 4px rgba(34, 211, 238, 0);
+    }
+}

@@ -1,0 +1,18 @@
+﻿@using Utils.Tokens
+
+<span class="pill @StatusClass">
+    @Status
+</span>
+
+@code {
+    [Parameter] public string Status { get; set; } = "Default";
+    
+    private string StatusClass => Status.ToLower() switch
+    {
+        "active" => "active",
+        "confirmed" => "confirmed",
+        "cancelled" => "cancelled",
+        "past" => "past",
+        _ => "default"
+    };
+}

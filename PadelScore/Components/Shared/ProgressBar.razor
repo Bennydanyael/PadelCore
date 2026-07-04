@@ -1,0 +1,20 @@
+﻿<div class="progress-bar">
+    <div class="progress-bar-fill" style="width: @GetPercentage()%">
+        @if (!string.IsNullOrEmpty(Label))
+        {
+            <span class="progress-label">@Label</span>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter] public int Value { get; set; }
+    [Parameter] public int Max { get; set; }
+    [Parameter] public string? Label { get; set; }
+
+    private double GetPercentage()
+    {
+        if (Max <= 0) return 0;
+        return Math.Min((double)Value / Max * 100, 100);
+    }
+}

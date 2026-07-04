@@ -1,0 +1,231 @@
+﻿@inject Services.DataService Data
+
+<div class="book-screen">
+    <!-- App Bar -->
+    <div class="app-bar">
+        <button class="back-btn" @onclick="NavigateToHome">←</button>
+        <span class="screen-title">Book a Court</span>
+        <div style="width: 24px;"></div>
+    </div>
+
+    <!-- Step Indicator -->
+    <StepIndicator CurrentStep="@CurrentStep" />
+
+    <!-- Step 1: Court Selection -->
+    @if (CurrentStep == 0)
+    {
+        <div class="step-content">
+            <SectionLabel Title="Choose Court" Subtitle="Select your preferred court" />
+            <div class="court-grid">
+                @foreach (var court in Data.CourtsHome)
+                {
+                    <div class="court-option @(SelectedCourt?.Id == court.Id ? "selected" : "")"
+                         @onclick="() => SelectCourt(court)">
+                        <span class="court-emoji">@court.Emoji</span>
+                        <span class="court-name">@court.Name</span>
+                        <span class="court-price">@Utils.Tokens.Formatter.FormatCurrency(court.Price)</span>
+                        @if (SelectedCourt?.Id == court.Id)
+                        {
+                            <span class="check-mark">✓</span>
+                        }
+                    </div>
+                }
+            </div>
+            
+            <PrimaryButton Disabled="SelectedCourt == null"
+                         OnClick="() => CurrentStep = 1">
+                Next →
+            </PrimaryButton>
+        </div>
+    }
+
+    <!-- Step 2: Date & Time Selection -->
+    @if (CurrentStep == 1)
+    {
+        <div class="step-content">
+            <SectionLabel Title="Select Date & Time" Subtitle="Choose when to play" />
+            
+            <!-- Date Strip -->
+            <div class="date-strip">
+                @foreach (var date in GetWeekDays())
+                {
+                    <button class="date-chip @(SelectedDate == date ? "selected" : "")"
+                            @onclick="() => SelectedDate = date">
+                        <span class="day">@Utils.Tokens.Formatter.FormatShortDay(date)</span>
+                        <span class="date">@date.Day</span>
+                        @if (HasAvailableSlots(date))
+                        {
+                            <span class="slot-dot"></span>
+                        }
+                    </button>
+                }
+            </div>
+
+            <!-- Duration -->
+            <div class="duration-selector">
+                <button class="duration-option @(SelectedDuration == 60 ? "selected" : "")"
+                        @onclick="() => SelectedDuration = 60">
+                    60 min
+                </button>
+                <button class="duration-option @(SelectedDuration == 90 ? "selected" : "")"
+                        @onclick="() => SelectedDuration = 90">
+                    90 min
+                </button>
+            </div>
+
+            <!-- Time Grid -->
+            <div class="time-grid">
+                @foreach (var slot in GetTimeSlots())
+                {
+                    <button class="time-slot @(slot.IsFull ? "full" : "") @(slot.IsSelected ? "selected" : "")"
+                            disabled="@slot.IsFull"
+                            @onclick="() => SelectTime(slot)">
+                        @Utils.Tokens.Formatter.FormatTime(slot.Time)
+                        @if (slot.IsFull)
+                        {
+                            <span class="strikethrough"></span>
+                        }
+                    </button>
+                }
+            </div>
+
+            <PrimaryButton Disabled="SelectedTime == null" OnClick="() => CurrentStep = 2">
+                Next →
+            </PrimaryButton>
+        </div>
+    }
+
+    @if (CurrentStep == 2)
+    {
+        <div class="step-content">
+            <SectionLabel Title="Confirm Booking" Subtitle="Review your selection" />
+            
+            <div class="summary-card">
+                <div class="summary-row">
+                    <span>Court</span>
+                    <span>@SelectedCourt?.Name</span>
+                </div>
+                <div class="summary-row">
+                    <span>Date</span>
+                    <span>@Utils.Tokens.Formatter.FormatDate(SelectedDate)</span>
+                </div>
+                <div class="summary-row">
+                    <span>Time</span>
+                    <span>@(SelectedTime != null ? Utils.Tokens.Formatter.FormatTime(SelectedTime.Time) : "—")</span>
+                </div>
+                <div class="summary-row">
+                    <span>Duration</span>
+                    <span>@SelectedDuration min</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>@Utils.Tokens.Formatter.FormatCurrency(GetTotalPrice())</span>
+                </div>
+            </div>
+
+            <PrimaryButton OnClick="ConfirmBooking">
+                Confirm & Pay @Utils.Tokens.Formatter.FormatCurrency(GetTotalPrice())
+            </PrimaryButton>
+        </div>
+    }
+
+    @if (IsConfirmed)
+    {
+        <div class="success-state">
+            <span class="success-emoji">✅</span>
+            <h3>Booking Confirmed!</h3>
+            <div class="confirmation-details">
+                <p>@SelectedCourt?.Name · @Utils.Tokens.Formatter.FormatDate(SelectedDate)</p>
+                <p>@(SelectedTime != null ? Utils.Tokens.Formatter.FormatTime(SelectedTime.Time) : "") · @SelectedDuration min</p>
+                <p class="total-price">@Utils.Tokens.Formatter.FormatCurrency(GetTotalPrice())</p>
+            </div>
+           @*  <div class="success-actions">
+                <PrimaryButton OnClick="() => OnNavigate.InvokeAsync("mygames")">
+                    View My Games
+                </PrimaryButton>
+                <button class="secondary-btn" @onclick="ResetBooking">
+                    Book Another
+                </button>
+            </div> *@
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public EventCallback<string> OnNavigate { get; set; }
+    
+    private int CurrentStep = 0;
+    private Court? SelectedCourt;
+    private DateTime SelectedDate = DateTime.Today;
+    private int SelectedDuration = 60;
+    private TimeSlot? SelectedTime;
+    private bool IsConfirmed = false;
+    
+    private List<(string Key, string Label)> Filters = new();
+    
+    private void SelectCourt(Court court) => SelectedCourt = court;
+    
+    private void SelectTime(TimeSlot slot)
+    {
+        if (!slot.IsFull) SelectedTime = slot;
+    }
+    
+    private decimal GetTotalPrice()
+    {
+        if (SelectedCourt == null) return 0;
+        return SelectedDuration == 60 
+            ? SelectedCourt.Price 
+            : Math.Round(SelectedCourt.Price * 1.35m);
+    }
+    
+    private void ConfirmBooking()
+    {
+        IsConfirmed = true;
+    }
+    
+    private void ResetBooking()
+    {
+        CurrentStep = 0;
+        SelectedCourt = null;
+        SelectedTime = null;
+        IsConfirmed = false;
+        OnNavigate.InvokeAsync("home");
+    }
+    
+    private List<DateTime> GetWeekDays()
+    {
+        return Enumerable.Range(0, 7)
+            .Select(i => DateTime.Today.AddDays(i))
+            .ToList();
+    }
+    
+    private bool HasAvailableSlots(DateTime date) => date.DayOfWeek != DayOfWeek.Monday;
+    
+    private List<TimeSlot> GetTimeSlots()
+    {
+        var slots = new List<TimeSlot>();
+        var start = new TimeSpan(8, 0, 0);
+        var end = new TimeSpan(22, 0, 0);
+        
+        for (var time = start; time <= end; time = time.Add(TimeSpan.FromMinutes(SelectedDuration)))
+        {
+            slots.Add(new TimeSlot
+            {
+                Time = time,
+                IsFull = time.Hours >= 20 || time.Hours <= 9,
+                IsSelected = SelectedTime?.Time == time
+            });
+        }
+        
+        return slots;
+    }
+    
+    private class TimeSlot
+    {
+        public TimeSpan Time { get; set; }
+        public bool IsFull { get; set; }
+        public bool IsSelected { get; set; }
+    }
+
+    private void NavigateToHome() => OnNavigate.InvokeAsync("home");
+}

@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+
+@* <div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+ *@
+
+ <div class="app-container">
+    <!-- Main Content -->
+    <div class="main-content">
+        @Body
+    </div>
+    
+    <!-- Bottom Navigation -->
+    @* <BottomNav ActiveTab="@CurrentTab" OnNavigate="@HandleNavigation" /> *@
+</div> 
+@* 
+@code {
+    [Parameter] public string CurrentTab { get; set; } = "home";
+    [Parameter] public EventCallback<string> OnNavigate { get; set; }
+
+    private void HandleNavigation(string tab)
+    {
+        OnNavigate.InvokeAsync(tab);
+    }
+} *@

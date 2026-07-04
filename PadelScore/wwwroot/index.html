@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>PadelScore</title>
+    <base href="/" />
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="pill.css" />
+    <link rel="stylesheet" href="Courts.css" />
+    <link rel="stylesheet" href="PadelScore.styles.css" />
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+    <div class="status-bar-safe-area"></div>
+
+    <div id="app">
+        <!-- Loading indicator while Blazor loads -->
+        <div style="display: flex; align-items: center; justify-content: center; height: 100vh; background: #050B14; color: #22D3EE; font-family: sans-serif;">
+            <div style="text-align: center;">
+                <div class="brand">
+                    <span class="brand-padel">PADEL</span>
+                    <span class="brand-core">CORE</span>
+                </div>
+                <div style="margin-top: 8px; font-size: 12px; color: rgba(255,255,255,0.3);">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui" data-nosnippet>
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">🗙</span>
+    </div>
+
+    <script src="_framework/blazor.webview.js" autostart="false"></script>
+
+</body>
+
+</html>

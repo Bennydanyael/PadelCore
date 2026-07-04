@@ -1,0 +1,257 @@
+﻿@page "/"
+
+@using Models
+@using Utils.Tokens
+
+@inject Services.DataService Data
+@inject NavigationManager NavigationManager
+
+<div class="home-screen">
+    <!-- App Bar -->
+    <div class="app-bar">
+        <div class="app-bar-content">
+            <div class="location-section">
+                <span class="location-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                </span>
+                <span class="location-text">Kemang, Jakarta Selatan</span>
+            </div>
+            
+            <div class="brand-row">
+                <div class="brand">
+                    <span class="brand-padel">PADEL</span>
+                    <span class="brand-core">CORE</span>
+                </div>
+                <div class="app-bar-right">
+                    <button class="notification-btn" aria-label="Notifications">
+                        <span class="bell-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                            </svg>
+                        </span>
+                        <span class="notification-dot"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-content">
+    <div class="pass-card">
+        <div class="pass-header">
+            <div class="pass-info">
+                <div class="pass-title-group">
+                    <span class="pass-tier">REGULAR PASS</span>
+                    <span class="sessions-left">@($"{Data.User.Pass.RemainingSessions} sessions left")</span>
+                </div>
+            </div>
+            <Pill Status="Active" />
+        </div>
+        <div class="progress-section">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: 12px; color: rgba(255,255,255,0.5);">Sessions used</span>
+                <span style="font-size: 12px; color: rgba(0, 255, 255, 0.7);; font-weight: 600;">
+                    @($"{Data.User.Pass.UsedSessions} / {Data.User.Pass.TotalSessions}")
+                </span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-bar-fill"
+                        style="width: @(Math.Min((double)0 / Data.User.Pass.TotalSessions * 100, 100))%">
+                </div>
+            </div>
+
+            <div class="expiry-buy-row">
+                <span class="expiry-label">Expires @Formatter.FormatDate(Data.User.Pass.Expiry)</span>
+                <button class="buy-more-btn" @onclick="NavigateToPasses">
+                    Buy More >
+                </button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Live Status Section -->
+        <div class="section-header">
+            <div>
+                <span class="section-eyebrow">LIVE STATUS</span>
+                <h3 class="section-title">Courts Available Now</h3>
+            </div>
+            <button class="see-all-btn" @onclick="NavigateToCourts">
+                See all >
+            </button>
+        </div>
+
+        <!-- Live Courts Carousel -->
+        <div class="courts-carousel-home">
+            @foreach (var court in Data.Courts)
+            {
+                <div class="court-card-home">
+                    <div class="court-image-wrapper-home">
+                        <img src="Images/Padel.png" alt="Padel Court" class="court-image-home" />
+                </div>
+                <div class="court-info">
+                    <div class="court-name-row">
+                        <span class="court-name">@court.Name</span>
+                        @if (court.IsAvailable)
+                        {
+                            <span class="availability-dot-green"></span>
+                        }else
+                        {
+                            <span class="availability-dot-red"></span>
+                        }
+                        </div>
+        
+                    <div class="court-details">
+                        <span class="court-type" style="color: @court.Color">@court.Type</span>
+                        <span class="court-surface-home">@court.Surface</span>
+                    </div>
+                    <div class="court-price">@Formatter.FormatCurrency(court.Price)/hr</div>
+                    <PrimaryButton Disabled="!court.IsAvailable" OnClick="NavigateToBook">
+                        @(court.IsAvailable ? "Quick Book" : "Full")
+                    </PrimaryButton>
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- Upcoming Game Section -->
+        <div class="upcoming-section">
+            <div class="section-header">
+                <div>
+                    <span class="section-eyebrow">NEXT UP</span>
+                    <h3 class="section-title">Upcoming Game</h3>
+                </div>
+            </div>
+
+            <div class="upcoming-game">
+                <!-- Game Header - Court Name -->
+                <div class="game-header">
+                    <span class="court-name-game">Court A — Indoor Glass</span>
+                    <span class="game-time-label">STARTS IN</span>
+                </div>
+
+                <!-- Countdown Row -->
+                <div class="countdown-row">
+                    <span class="game-schedule">Today · 19:00–20:30</span>
+                    <span class="game-time-countdown">9h 19m</span>
+                </div>
+
+                <!-- Players VS -->
+                <div class="game-players">
+                    <!-- Player Teams -->
+                    <div class="player-teams">
+                        <div class="team team-left">
+                            <div class="player-avatars">
+                                <div class="avatar avatar-1">R</div>
+                                <div class="avatar avatar-2">B</div>
+                                <div class="avatar avatar-3">A</div>
+                                <div class="avatar avatar-4">S</div>
+                            </div>
+                            <div class="team-names">
+                                <span class="team-name-up">Rizal & Budi</span>
+                                <span class="team-name-bottom">VS Andi & Sinta</span>
+                            </div>
+                            <div class="capacity-box">
+                                <div class="capacity-icons">
+                                    <svg class="capacity-icon icon-1" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 19V18C3 15.7909 4.79086 14 7 14H11C13.2091 14 15 15.7909 15 18V19M15 11C16.6569 11 18 9.65685 18 8C18 6.34315 16.6569 5 15 5M21 19V18C21 15.7909 19.2091 14 17 14H16.5M12 8C12 9.65685 10.6569 11 9 11C7.34315 11 6 9.65685 6 8C6 6.34315 7.34315 5 9 5C10.6569 5 12 6.34315 12 8Z"
+                                              stroke="#22D3EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <span class="capacity-text">4/4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Club Ranking Section -->
+        <div class="section-header">
+            <div>
+                <span class="section-eyebrow">CLUB</span>
+                <h3 class="section-title">Club Ranking</h3>
+            </div>
+            <span class="your-rank">Your rank: #1</span>
+        </div>
+
+        <div class="ranking-list">
+            @foreach (var rank in Data.Rankings)
+            {
+                <div class="ranking-item @(rank.Rank == 1 ? "top-rank" : "")">
+                    <div class="rank-info">
+                        <span class="rank-number">@(!string.IsNullOrEmpty(rank.Emoji) ? rank.Emoji : $"#{rank.Rank}")</span>
+                        <div class="player-info" style="width:50px">
+                            <span class="player-name">@rank.Name</span>
+                            <span class="player-elo">@(rank.Elo + " ELO")</span>
+                        </div>
+                        <span class="trend @rank.Trend">
+                            @if (rank.Trend == "up")
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <polyline points="4 18 9 12 14 14 20 8" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <polyline points="14 8 20 8 20 14" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span class="change-value">+@rank.Change</span>
+                            }
+                            else if (rank.Trend == "down")
+                            {
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <polyline points="4 6 9 12 14 10 20 16" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <polyline points="14 16 20 16 20 10" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span class="change-value">@rank.Change</span>
+                            }
+                            else
+                            {
+                                <span class="change-value">— —</span>
+                            }
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Primary CTA -->
+        <PrimaryButton OnClick="NavigateToBook" CustomColor="#22D3EE">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13 2L4 14H12L11 22L20 10H12L13 2Z"
+                      fill="none"
+                      stroke="#000000"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+            </svg>
+            Book a Court Now 
+        </PrimaryButton>
+
+        <!-- Bottom Spacer -->
+        <div class="bottom-spacer"></div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback<string> OnNavigate { get; set; }
+    private User User => Data.User;
+
+    private void NavigateToBook() => OnNavigate.InvokeAsync("book");
+    private void NavigateToPasses()
+    {
+        NavigationManager.NavigateTo("/passes");
+    }
+    private void NavigateToCourts() 
+    {
+        NavigationManager.NavigateTo("/courts");
+    }
+    private void NavigateToMyGames() => OnNavigate.InvokeAsync("mygames");
+
+    private List<string> GetPlayers()
+    {
+        return new List<string> { "Rizal", "Budi", "Andi", "Sinta" };
+    }
+}

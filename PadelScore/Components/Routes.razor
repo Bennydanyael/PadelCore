@@ -1,0 +1,44 @@
+﻿<Router AppAssembly="typeof(MauiProgram).Assembly" NotFoundPage="typeof(Pages.NotFound)">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+</Router>
+
+@* <Router AppAssembly="@typeof(MauiProgram).Assembly">
+    <Found>
+        <MainLayout CurrentTab="@_currentTab">
+            @switch (_currentTab)
+            {
+                case "home":
+                    <Home OnNavigate="@HandleNavigation" />
+                    break;
+                case "courts":
+                    <Courts OnNavigate="@HandleNavigation" />
+                    break;
+                case "book":
+                    <Book OnNavigate="@HandleNavigation" />
+                    break;
+                case "mygames":
+                    <MyGames OnNavigate="@HandleNavigation" />
+                    break;
+                case "passes":
+                    <Passes OnNavigate="@HandleNavigation" />
+                    break;
+                default:
+                    <Home OnNavigate="@HandleNavigation" />
+                    break;
+            }
+        </MainLayout>
+    </Found>
+</Router>
+ *@
+@* @code {
+    private string _currentTab = "home";
+    
+    private void HandleNavigation(string tab)
+    {
+        _currentTab = tab;
+        StateHasChanged();
+    }
+} *@

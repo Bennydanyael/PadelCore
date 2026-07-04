@@ -1,0 +1,12 @@
+﻿<button class="primary-button @(Disabled ? "disabled" : "active")"
+        disabled="@Disabled"
+        @onclick="OnClick">
+    @ChildContent
+</button>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; } = default!;
+    [Parameter] public bool Disabled { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public string? CustomColor { get; set; }
+}
