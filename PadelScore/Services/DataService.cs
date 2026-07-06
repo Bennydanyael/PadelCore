@@ -127,7 +127,8 @@ namespace PadelScore.Services
                 Amenities = new[] { "AC", "Showers" },
                 ColorBackground = "rgba(34, 211, 238, 0.5);",
                 NextAvailable = DateTime.Now.AddHours(3).AddMinutes(0),
-                ColorConfirmedGame = "rgba(34, 197, 94, 0.5);"
+                ColorConfirmedGame = "rgba(34, 197, 94, 0.5);",
+                Time = new TimeSpan(19, 0, 0)
             },
             new()
             {
@@ -146,7 +147,8 @@ namespace PadelScore.Services
                 Lighting = "Halogen 350 lux",
                 Amenities = new[] { "Parking" },
                 ColorBackground = "rgba(163, 230, 53, 0.5);",
-                ColorConfirmedGame = "rgba(163, 230, 53, 0.5);"
+                ColorConfirmedGame = "rgba(163, 230, 53, 0.5);",
+                Time = new TimeSpan(09, 0, 0)
             },
             new()
             {
@@ -164,7 +166,8 @@ namespace PadelScore.Services
                 Size = "10 × 20 m",
                 Lighting = "Tournament 600 lux",
                 Amenities = new[] { "Parking" },
-                ColorBackground = "rgba(180, 130, 60, 0.5);"
+                ColorBackground = "rgba(180, 130, 60, 0.5);",
+                Time = new TimeSpan(09, 0, 0)
             },            new()
             {
                 Id = 4,
@@ -200,8 +203,50 @@ namespace PadelScore.Services
                 Partner = "Rahmat",
                 Price = 120000
             },
-            // Add more games...
         };
+
+            Games.AddRange(new List<Game>
+            {
+                new()
+                {
+                    Id = 1,
+                    CourtName = "Court A",
+                    Date = new DateTime(2026, 6, 1),
+                    Time = new TimeSpan(18, 0, 0),
+                    Status = "Past",
+                    Result = "WIN",
+                    Opponent = "Budi & Andi",
+                    Score = "6–3, 6–4",
+                    Rating = null,
+                    PathImage = "Images/CourtsA.png"
+                },
+                new()
+                {
+                    Id = 2,
+                    CourtName = "Court B",
+                    Date = new DateTime(2026, 5, 28),
+                    Time = new TimeSpan(16, 0, 0),
+                    Status = "Past",
+                    Result = "LOSS",
+                    Opponent = "Hendra",
+                    Score = "3–6, 4–6",
+                    Rating = 4,
+                    PathImage = "Images/CourtsB.png",
+                },
+                new()
+                {
+                    Id = 3,
+                    CourtName = "Court C",
+                    Date = new DateTime(2026, 5, 24),
+                    Time = new TimeSpan(9, 0, 0),
+                    Status = "Past",
+                    Result = "WIN",
+                    Opponent = "Sinta & Budi",
+                    Score = "6–2, 6–1",
+                    Rating = 5,
+                    PathImage = "Images/CourtsC.png",
+                }
+            });
 
             // Passes data
             Passes = new List<Pass>

@@ -17,6 +17,7 @@ public class Court
     public string[] Amenities { get; set; } = Array.Empty<string>();
     public string ColorBackground { get; set; }
     public string ColorConfirmedGame { get; set; }
+    public TimeSpan Time { get; set; }
 }
 
 public class Game
@@ -25,13 +26,16 @@ public class Game
     public string CourtName { get; set; } = string.Empty;
     public DateTime Date { get; set; }
     public TimeSpan Time { get; set; }
-    public string Status { get; set; } = string.Empty; // Confirmed, Past, Cancelled
-    public string Result { get; set; } = string.Empty; // WIN, LOSS, null
+    public string Status { get; set; } = string.Empty; 
+    public string Result { get; set; } = string.Empty; 
     public int? Rating { get; set; }
     public int Capacity { get; set; }
     public int BookedCount { get; set; }
     public string Partner { get; set; } = string.Empty;
     public decimal Price { get; set; }
+    public string Opponent { get; set; } = string.Empty;
+    public string Score { get; set; } = string.Empty;
+    public string PathImage { get; set; }
 }
 
 public class Pass
