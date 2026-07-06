@@ -1,0 +1,199 @@
+﻿@page "/mygames"
+
+@using Models
+@using Utils.Tokens
+@using System.Text.RegularExpressions
+
+@inject Services.DataService Data
+@inject NavigationManager NavigationManager
+
+<div class="mygames-screen">
+    <div class="app-bar-book">
+        <div class="app-bar-left">
+        <button class="back-btn" @onclick="NavigateHome" aria-label="Back">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+                <path d="M16 8L8 16L16 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8 16H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <span class="screen-title-book">My Games</span>
+        <div style="width: 40px;"></div>
+    </div>
+    </div>
+    <div class="game-section">
+        <span class="section-eyebrow-game">YOUR STATS</span>
+    </div>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-value" style="color: #22D3EE;">12</span>
+            <span class="stat-label">Games</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value" style="color: #A3E635;">65%</span>
+            <span class="stat-label">Win Rate</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value" style="color: #F59E0B;">4.2⭐</span>
+            <span class="stat-label">Avg Rating</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value" style="color: #A78BFA;">850</span>
+            <span class="stat-label">ELO</span>
+        </div>
+    </div>
+
+    <div class="tab-bar">
+        @foreach (var tab in Tabs)
+        {
+            <button class="tab @(SelectedTab == tab.Key ? "active" : "")"
+                    @onclick="() => SelectedTab = tab.Key">
+                @tab.Label
+            </button>
+        }
+    </div>
+
+        @foreach (var game in FilteredGames)
+        {
+                @if (SelectedTab == "upcoming")
+                {
+                  @foreach (var court in FilteredCourts.Where(c => new int[] { 1, 3 }.Contains(c.Id)))
+        {
+            <div class="court-card-game" style="background:@court.ColorBackground">
+                <div class="court-header-game">
+                    <div class="court-image-wrapper-game">
+                        <img src="@court.PathImage" alt="Padel Court" class="court-image" />
+                   </div>
+                <div class="court-title-game">
+                    <div class="court-name-row-game">
+                        <h2>@court.Name</h2>
+                            @{
+                                    if (!string.IsNullOrEmpty(court.ColorConfirmedGame))
+                                    {
+                                        _color = Regex.Replace(court.ColorConfirmedGame, @"0\.\d+", "0.3");
+                                    }
+                            }
+                        <span class="court-type-confirmed" 
+                            style="color: @_color border: @court.ColorConfirmedGame background: @court.ColorConfirmedGame">Confirmed</span>
+                    </div>
+                </div>
+            </div>
+                 <!-- Date & Time -->
+                <div class="game-schedule">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" 
+                              stroke="#22D3EE" 
+                              stroke-width="1.5" 
+                              stroke-linecap="round"/>
+                    </svg>
+                    <span class="game-date">Tomorrow</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 6V12" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16.24 16.24L12 12" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="game-time">@Formatter.FormatTime(game.Time) – @Formatter.FormatTime(game.Time.Add(TimeSpan.FromMinutes(90)))</span>
+                <span class="countdown-label">Starts in</span>
+                    <span class="game-time-label">1h 9m 22s</span>
+                </div>
+                <div class="game-players-mygame">
+                    <div class="player-teams-mygame">
+                        <div class="team-mygame team-left-mygame">
+                            <div class="player-avatars">
+                                <div class="avatar-mygame avatar-1">R</div>
+                                <div class="avatar-mygame avatar-2">B</div>
+                                <div class="avatar-mygame avatar-3">A</div>
+                            </div>
+                            <div class="team-names-mygame">
+                                <div class="team-names-wrapper">
+                                    <span class="team-name-up-mygame">Budi & Andi</span>
+                                    <span class="team-name-bottom-mygame">@Formatter.FormatCurrency(court.Price * 1.35m)</span>
+                                </div> 
+                                <div class="team-actions">
+                                    <button class="reschedule-btn">Reschedule</button>
+                                    <button class="cancel-btn">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }    
+                
+                }
+                else if (SelectedTab == "past" && game.Result != null)
+                {
+                    <div class="game-result">
+                        <span class="result-badge @(game.Result == "WIN" ? "win" : "loss")">
+                            @game.Result
+                            @if (game.Result == "WIN") { <span>🏆</span> }
+                            else { <span>💔</span> }
+                        </span>
+                        @if (game.Rating != null)
+                        {
+                            <div class="stars">@(new string('⭐', game.Rating.Value))</div>
+                        }
+                        else
+                        {
+                            <button class="rate-btn" @onclick="() => ShowRatingModal(game)">
+                                Rate Game
+                            </button>
+                        }
+                    </div>
+                }
+        }
+        
+        @if (!FilteredGames.Any())
+        {
+            <div class="empty-state">
+                <span class="emoji">😌</span>
+                <h3>No @SelectedTab games</h3>
+                <p>@(SelectedTab == "cancelled" ? "You have no cancelled bookings" : "Book your first game now!")</p>
+            </div>
+        }
+</div>
+
+@code {
+    [Parameter] public EventCallback<string> OnNavigate { get; set; }
+    private string SelectedTab = "upcoming";
+    private List<Game> FilteredGames => SelectedTab switch
+    {
+        "upcoming" => Data.Games.Where(g => g.Status == "Confirmed").ToList(),
+        "past" => Data.Games.Where(g => g.Status == "Past").ToList(),
+        "cancelled" => Data.Games.Where(g => g.Status == "Cancelled").ToList(),
+        _ => Data.Games
+    };
+    private string _color = "";
+    private string SelectedFilter = "all";
+    private List<Court> FilteredCourts => SelectedFilter == "all" 
+        ? Data.CourtsPage
+        : Data.CourtsPage.Where(c => c.Categories.Contains(SelectedFilter)).ToList();
+    
+    private List<(string Key, string Label)> Tabs = new()
+    {
+        ("upcoming", "Upcoming"),
+        ("past", "Past"),
+        ("cancelled", "Cancelled")
+    };
+    
+    private string GetGameStatus(Game game)
+    {
+        return game.Status switch
+        {
+            "Confirmed" => "Active",
+            "Past" => "Past",
+            "Cancelled" => "Cancelled",
+            _ => "Active"
+        };
+    }
+    
+    private void ShowRatingModal(Game game)
+    {
+        // Implement rating modal with star picker
+    }
+
+    private async Task NavigateHome()
+    {
+            NavigationManager.NavigateTo("/");
+    }
+}

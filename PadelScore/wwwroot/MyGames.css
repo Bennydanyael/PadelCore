@@ -1,0 +1,671 @@
+.mygames-screen {
+    background: #050B14;
+    min-height: 100vh;
+    width: 100%;
+    padding: 0 16px 80px 16px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.app-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    background: #050B14;
+    z-index: 10;
+}
+
+.game-section {
+    margin: 16px 0;
+}
+.section-header-game {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 12px;
+}
+
+.section-eyebrow-game {
+    font-size: 9px;
+    font-weight: 700;
+    color: #22D3EE;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+}
+
+.screen-title {
+    font-size: 17px;
+    font-weight: 900;
+    color: #FFFFFF;
+}
+
+.court-type-confirmed {
+    position: absolute;
+    top:10px;
+    right: 0px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 12px;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    min-height: 20px;
+    transition: all 0.3s ease;
+}
+.court-title-game {
+    flex: 1;
+    min-width: 0;
+}
+
+.court-title-game h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 2px 0;
+    color: #FFFFFF;
+    letter-spacing: -0.3px;
+}
+
+.court-title-game h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 2px 0;
+    color: #FFFFFF;
+    letter-spacing: -0.3px;
+}
+.court-name-row-game {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.court-name-row-game h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0;
+    color: #FFFFFF;
+    letter-spacing: -0.3px;
+}
+
+.profile-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    padding: 14px 8px;
+    margin-bottom: 16px;
+    margin-top: 26px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.stat-label {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.tab-bar {
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 16px;
+}
+
+.tab {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+    .tab.active {
+        background: #22D3EE;
+        color: #050B14;
+        box-shadow: 0 8px 32px rgba(34, 211, 238, 0.35);
+    }
+
+.game-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 8px;
+}
+
+.game-info h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #FFFFFF;
+}
+
+.game-date, .game-time {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-right: 8px;
+}
+
+.players {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 8px 0;
+}
+
+.avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+    .avatar.filled {
+        background: rgba(34, 211, 238, 0.2);
+    }
+
+    .avatar.empty {
+        background: rgba(255, 255, 255, 0.04);
+        color: rgba(255, 255, 255, 0.2);
+    }
+
+.capacity {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+    margin-left: 4px;
+}
+
+.game-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.price {
+    font-weight: 700;
+    color: #22D3EE;
+}
+.team-names-mygame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.team-names-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.team-name-up-mygame {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.team-name-bottom-mygame {
+    font-size: 12px;
+    font-weight: 600;
+    color: #22D3EE;
+}
+
+.team-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.reschedule-btn {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 18px;
+}
+
+.reschedule-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.cancel-btn {
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    background: rgba(239, 68, 68, 0.08);
+    color: #EF4444;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+}
+
+.rate-btn {
+    background: rgba(34, 211, 238, 0.15);
+    color: #22D3EE;
+}
+
+.game-result {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.result-badge {
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+    .result-badge.win {
+        background: rgba(34, 197, 94, 0.15);
+        color: #22C55E;
+    }
+
+    .result-badge.loss {
+        background: rgba(239, 68, 68, 0.15);
+        color: #EF4444;
+    }
+
+.stars {
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+/* ===== COURT CARD ===== */
+.court-card-game {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 5px 16px 10px 10px;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+.court-image-wrapper-game {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(34, 211, 238, 0.06);
+    border: 1px solid rgba(34, 211, 238, 0.08);
+}
+
+    .court-card-game:hover {
+        border-color: rgba(34, 211, 238, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+.court-header-game {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+    background: transparent;
+    padding: 5px 0px 0px 0px;
+}
+
+/* ===== GAME SCHEDULE ===== */
+.game-schedule {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.game-date {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== COUNTDOWN ===== */
+.game-countdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: rgba(34, 211, 238, 0.04);
+    border: 1px solid rgba(34, 211, 238, 0.06);
+    border-radius: 8px;
+}
+
+.countdown-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.countdown-time {
+    font-size: 16px;
+    font-weight: 700;
+    color: #22D3EE;
+    margin-left: auto;
+}
+
+/* Game Players */
+.game-players-mygame {
+    padding: 8px 0;
+    border-top: 2px solid rgba(255, 255, 255, 0.04);
+    margin: 12px 0;
+}
+
+.player-teams-mygame {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+}
+
+.team-mygame {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.team-left-mygame {
+    justify-content: flex-start;
+}
+
+.team-names-mygame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.team-names-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.team-name-up-mygame {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.team-name-bottom-mygame {
+    font-size: 12px;
+    font-weight: 600;
+    color: gray;
+}
+
+.player-avatars-mygame {
+    display: flex;
+    gap: -4px;
+}
+
+.avatar-mygame {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #050B14;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    margin-right: -17px;
+}
+
+    .avatar-mygame:last-child {
+        margin-right: 0;
+    }
+
+.avatar-mygame-1 {
+    background: #22D3EE;
+    color: #050B14;
+}
+
+.avatar-mygame-2 {
+    background: #A3E635;
+    color: #050B14;
+}
+
+.avatar-mygame-3 {
+    background: #7C3AED;
+    color: #FFFFFF;
+}
+
+.avatar-mygame-4 {
+    background: #F59E0B;
+    color: #050B14;
+}
+
+.capacity-box-mygame {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid #22D3EE;
+    border-radius: 8px;
+    padding: 6px 16px 6px 12px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 0;
+}
+
+.capacity-icons-mygame {
+    display: flex;
+    position: relative;
+}
+
+.capacity-icon-mygame{
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+    width: 18px;
+    height: 18px;
+}
+
+    .capacity-icon-mygame.icon-1 {
+        opacity: 1;
+        z-index: 2;
+        margin-right: -6px;
+    }
+
+    .capacity-icon-mygame.icon-2 {
+        opacity: 0.5;
+        z-index: 1;
+        margin-right: 0;
+    }
+
+.capacity-text-mygame {
+    font-size: 12px;
+    font-weight: 700;
+    color: #22D3EE;
+    margin-left: 2px;
+}
+
+.capacity-box-mygame:hover {
+    border-color: rgba(34, 211, 238, 0.6);
+    box-shadow: 0 0 20px rgba(34, 211, 238, 0.05);
+}
+
+    .capacity-box-mygame:hover .capacity-icon-mygame.icon-2 {
+        opacity: 0.7;
+    }
+/* ===== PRICE ===== */
+.game-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: #22D3EE;
+    margin-bottom: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* ===== ACTIONS ===== */
+.game-actions {
+    display: flex;
+    gap: 8px;
+}
+
+    .game-actions button {
+        flex: 1;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: none;
+        font-weight: 600;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 360px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .game-schedule {
+        flex-wrap: wrap;
+    }
+
+    .game-actions {
+        flex-direction: column;
+    }
+}
+
+/* ===== GAME CARD ===== */
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 16px;
+    transition: all 0.3s ease;
+}
+
+    .game-card:hover {
+        border-color: rgba(34, 211, 238, 0.15);
+    }
+
+/* ===== GAME HEADER ===== */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.game-info h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 2px 0;
+}
+
+.game-type {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.game-status {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 12px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+    .game-status.confirmed {
+        background: rgba(34, 197, 94, 0.12);
+        color: #22C55E;
+        border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    .game-status.past {
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .game-status.cancelled {
+        background: rgba(239, 68, 68, 0.12);
+        color: #EF4444;
+        border: 1px solid rgba(239, 68, 68, 0.2);
+    }

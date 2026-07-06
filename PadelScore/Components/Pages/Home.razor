@@ -24,6 +24,7 @@
                 <div class="brand">
                     <span class="brand-padel">PADEL</span>
                     <span class="brand-core">CORE</span>
+                    <span class="welcome-text">Good morning, Rizal 👋 </span>
                 </div>
                 <div class="app-bar-right">
                     <button class="notification-btn" aria-label="Notifications">
@@ -36,6 +37,7 @@
                         <span class="notification-dot"></span>
                     </button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -67,8 +69,8 @@
             </div>
 
             <div class="expiry-buy-row">
-                <span class="expiry-label">Expires @Formatter.FormatDate(Data.User.Pass.Expiry)</span>
-                <button class="buy-more-btn" @onclick="NavigateToPasses">
+                <span class="expiry-label">Expires @Utils.Tokens.Formatter.FormatDate(Data.User.Pass.Expiry)</span>
+                <button class="buy-more-btn" @onclick="NavigateToMyGames">
                     Buy More >
                 </button>
             </div>
@@ -88,7 +90,7 @@
 
         <!-- Live Courts Carousel -->
         <div class="courts-carousel-home">
-            @foreach (var court in Data.Courts)
+            @foreach (var court in Data.CourtsHome)
             {
                 <div class="court-card-home">
                     <div class="court-image-wrapper-home">
@@ -107,7 +109,7 @@
                         </div>
         
                     <div class="court-details">
-                        <span class="court-type" style="color: @court.Color">@court.Type</span>
+                        <span class="court-type" style="color: gray">@court.Type</span>
                         <span class="court-surface-home">@court.Surface</span>
                     </div>
                     <div class="court-price">@Formatter.FormatCurrency(court.Price)/hr</div>
@@ -119,7 +121,6 @@
             }
         </div>
 
-        <!-- Upcoming Game Section -->
         <div class="upcoming-section">
             <div class="section-header">
                 <div>
@@ -135,15 +136,12 @@
                     <span class="game-time-label">STARTS IN</span>
                 </div>
 
-                <!-- Countdown Row -->
                 <div class="countdown-row">
                     <span class="game-schedule">Today · 19:00–20:30</span>
                     <span class="game-time-countdown">9h 19m</span>
                 </div>
 
-                <!-- Players VS -->
                 <div class="game-players">
-                    <!-- Player Teams -->
                     <div class="player-teams">
                         <div class="team team-left">
                             <div class="player-avatars">
@@ -171,7 +169,6 @@
             </div>
         </div>
 
-        <!-- Club Ranking Section -->
         <div class="section-header">
             <div>
                 <span class="section-eyebrow">CLUB</span>
@@ -239,7 +236,10 @@
     [Parameter] public EventCallback<string> OnNavigate { get; set; }
     private User User => Data.User;
 
-    private void NavigateToBook() => OnNavigate.InvokeAsync("book");
+    private void NavigateToBook() 
+    {
+        NavigationManager.NavigateTo("/book");
+    }
     private void NavigateToPasses()
     {
         NavigationManager.NavigateTo("/passes");
@@ -248,7 +248,10 @@
     {
         NavigationManager.NavigateTo("/courts");
     }
-    private void NavigateToMyGames() => OnNavigate.InvokeAsync("mygames");
+    private void NavigateToMyGames() 
+    {
+        NavigationManager.NavigateTo("/mygames");
+    }
 
     private List<string> GetPlayers()
     {

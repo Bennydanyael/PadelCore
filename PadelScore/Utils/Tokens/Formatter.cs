@@ -12,7 +12,7 @@ public static class Formatter
     public static string FormatDate(DateTime date)
     {
         var culture = new CultureInfo("id-ID");
-        return date.ToString("dd MMM yyyy", culture);
+        return date.ToString("dd MMM", culture);
     }
 
     public static string FormatNumber(int number)

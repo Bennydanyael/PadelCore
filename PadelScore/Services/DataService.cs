@@ -39,9 +39,8 @@ namespace PadelScore.Services
             {
                 Id = 1,
                 Name = "Court A",
-                Emoji = "",
                 Type = "Indoor Glass",
-                Color = "#ABADA6",
+                Color = "rgba(34, 211, 238, 0.5);",
                 Location = "Building A",
                 IsAvailable = true,
                 Price = 120000,
@@ -49,15 +48,17 @@ namespace PadelScore.Services
                 Surface = "",
                 Size = "20×10m",
                 Lighting = "LED",
-                Amenities = new[] { "AC", "Showers" }
+                Amenities = new[] { "AC", "Showers" },
+                PathImage = "Images/CourtsA.png",
+                ColorBackground = "rgba(34, 211, 238, 0.5);",
+                ColorConfirmedGame = "rgba(34, 197, 94, 0.5);"
             },
             new()
             {
                 Id = 2,
                 Name = "Court B",
-                Emoji = "",
                 Type = "Outdoor",
-                Color = "#ABADA6",
+                Color = "rgba(180, 130, 60, 0.5);",
                 Location = "Building B",
                 IsAvailable = false,
                 NextAvailable = DateTime.Now.AddHours(2),
@@ -66,15 +67,16 @@ namespace PadelScore.Services
                 Surface = "",
                 Size = "20×10m",
                 Lighting = "Floodlight",
-                Amenities = new[] { "Parking" }
+                Amenities = new[] { "Parking" },
+                PathImage = "Images/CourtsB.png",
+                ColorConfirmedGame = "rgba(34, 197, 94, 0.5);"
             },
             new()
             {
                 Id = 3,
                 Name = "Court C",
-                Emoji = "",
                 Type = "Outdoor",
-                Color = "#ABADA6",
+                Color = "rgba(180, 130, 60, 0.5);",
                 Location = "Building C",
                 IsAvailable = true,
                 NextAvailable = DateTime.Now.AddHours(2),
@@ -83,14 +85,15 @@ namespace PadelScore.Services
                 Surface = "",
                 Size = "20×10m",
                 Lighting = "Floodlight",
-                Amenities = new[] { "Parking" }
+                PathImage = "Images/CourtsC.png",
+                Amenities = new[] { "Parking" },
+                ColorConfirmedGame = "rgba(34, 197, 94, 0.5);"
             },            new()
             {
                 Id = 4,
                 Name = "Court D",
-                Emoji = "",
                 Type = "Glass Wall",
-                Color = "#ABADA6",
+                Color = "rgba(139, 92, 246, 0.5)",
                 Location = "Building D",
                 IsAvailable = true,
                 NextAvailable = DateTime.Now.AddHours(2),
@@ -99,7 +102,9 @@ namespace PadelScore.Services
                 Surface = "",
                 Size = "20×10m",
                 Lighting = "Floodlight",
-                Amenities = new[] { "Parking" }
+                PathImage = "Images/CourtsD.png",
+                Amenities = new[] { "Parking" },
+                ColorBackground = "rgba(139, 92, 246, 0.5);"
             },
         };
 
@@ -109,68 +114,74 @@ namespace PadelScore.Services
             {
                 Id = 1,
                 Name = "Court A",
-                Emoji = "",
+                PathImage = "Images/CourtsA.png",
                 Type = "Indoor Glass",
-                Color = "#ABADA6",
-                Location = "Building A",
+                Color = "rgba(34, 211, 238, 0.5);",
+                Location = "Kemang, Jaksel",
                 IsAvailable = true,
-                Price = 120000,
+                Price = 200000,
                 Categories = new[] { "Indoor", "Premium" },
-                Surface = "",
-                Size = "20×10m",
-                Lighting = "LED",
+                Surface = "Artificial Turf",
+                Size = "10 × 20 m",
+                Lighting = "LED 400 LUX",
                 Amenities = new[] { "AC", "Showers" },
-                ColorBackground = "rgba(34, 211, 238, 0.6);"
+                ColorBackground = "rgba(34, 211, 238, 0.5);",
+                NextAvailable = DateTime.Now.AddHours(3).AddMinutes(0),
+                ColorConfirmedGame = "rgba(34, 197, 94, 0.5);"
             },
             new()
             {
                 Id = 2,
                 Name = "Court B",
-                Emoji = "",
+                PathImage = "Images/CourtsB.png",
                 Type = "Outdoor",
-                Color = "#ABADA6",
-                Location = "Building B",
+                Color = "rgba(163, 230, 53, 0.5)",
+                Location = "PIK, Jakarta Utara",
                 IsAvailable = false,
-                NextAvailable = DateTime.Now.AddHours(2),
-                Price = 85000,
+                NextAvailable = DateTime.Now.AddHours(3).AddMinutes(0),
+                Price = 150000,
                 Categories = new[] { "Outdoor" },
-                Surface = "",
-                Size = "20×10m",
-                Lighting = "Floodlight",
-                Amenities = new[] { "Parking" }
+                Surface = "Sand & Turf",
+                Size = "10 × 20 m",
+                Lighting = "Halogen 350 lux",
+                Amenities = new[] { "Parking" },
+                ColorBackground = "rgba(163, 230, 53, 0.5);",
+                ColorConfirmedGame = "rgba(163, 230, 53, 0.5);"
             },
             new()
             {
                 Id = 3,
                 Name = "Court C",
-                Emoji = "",
+                PathImage = "Images/CourtsC.png",
                 Type = "Outdoor",
-                Color = "#ABADA6",
-                Location = "Building C",
+                Color = "rgba(180, 130, 60, 0.5);",
+                Location = "Alam Sutera, Tangerang",
                 IsAvailable = true,
-                NextAvailable = DateTime.Now.AddHours(2),
-                Price = 85000,
+                NextAvailable = DateTime.Now.AddHours(3).AddMinutes(0),
+                Price = 350000,
                 Categories = new[] { "Outdoor" },
-                Surface = "",
-                Size = "20×10m",
-                Lighting = "Floodlight",
-                Amenities = new[] { "Parking" }
+                Surface = "Pro Artificial Turf",
+                Size = "10 × 20 m",
+                Lighting = "Tournament 600 lux",
+                Amenities = new[] { "Parking" },
+                ColorBackground = "rgba(180, 130, 60, 0.5);"
             },            new()
             {
                 Id = 4,
                 Name = "Court D",
-                Emoji = "",
+                PathImage = "Images/CourtsD.png",
                 Type = "Glass Wall",
-                Color = "#ABADA6",
-                Location = "Building D",
+                Color = "rgba(139, 92, 246, 0.5)",
+                Location = "Kemang, Jaksel",
                 IsAvailable = true,
-                NextAvailable = DateTime.Now.AddHours(2),
-                Price = 85000,
+                NextAvailable = DateTime.Now.AddHours(3).AddMinutes(0),
+                Price = 280000,
                 Categories = new[] { "Outdoor" },
-                Surface = "",
-                Size = "20×10m",
-                Lighting = "Floodlight",
-                Amenities = new[] { "Parking" }
+                Surface = "Artificial Turf",
+                Size = "10 × 20 m",
+                Lighting = "LED 500 lux",
+                Amenities = new[] { "Parking" },
+                ColorBackground = "rgba(139, 92, 246, 0.5)"
             },
         };
 

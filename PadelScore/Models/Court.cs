@@ -3,7 +3,7 @@ public class Court
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
-    public string Emoji { get; set; } = string.Empty;
+    public string PathImage { get; set; } = string.Empty;
     public string Type { get; set; } = string.Empty;
     public string Color { get; set; } = string.Empty;
     public string Location { get; set; } = string.Empty;
@@ -16,6 +16,7 @@ public class Court
     public string Lighting { get; set; } = string.Empty;
     public string[] Amenities { get; set; } = Array.Empty<string>();
     public string ColorBackground { get; set; }
+    public string ColorConfirmedGame { get; set; }
 }
 
 public class Game
