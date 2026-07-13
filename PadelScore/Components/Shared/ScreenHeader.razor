@@ -1,0 +1,30 @@
+@namespace PadelScore.Components.Shared
+
+<div class="screen-header">
+	<div class="left">
+		@if (LeftContent != null)
+		{
+			@LeftContent
+		}
+	</div>
+	<div class="center">
+		<div class="title">@Title</div>
+		@if (!string.IsNullOrEmpty(Subtitle))
+		{
+			<div class="subtitle">@Subtitle</div>
+		}
+	</div>
+	<div class="right">
+		@if (RightContent != null)
+		{
+			@RightContent
+		}
+	</div>
+</div>
+
+@code {
+	[Parameter] public string Title { get; set; } = string.Empty;
+	[Parameter] public string Subtitle { get; set; } = string.Empty;
+	[Parameter] public RenderFragment? LeftContent { get; set; }
+	[Parameter] public RenderFragment? RightContent { get; set; }
+}

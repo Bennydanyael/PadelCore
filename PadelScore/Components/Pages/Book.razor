@@ -6,22 +6,20 @@
 @using System.Text.RegularExpressions
 
 @inject Services.DataService Data
-@inject NavigationManager NavigationManager
+@inject PadelScore.Utils.Containers.NavigationState NavState
 
 <div class="book-screen">
-    <div class="app-bar-book">
-        <div class="app-bar-left">
-        <button class="back-btn" @onclick="NavigateHome" aria-label="Back">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                <path d="M16 8L8 16L16 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M8 16H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        </button>
-        <span class="screen-title-book">Book a Court</span>
-        <div style="width: 40px;"></div>
-    </div>
-    </div>
+    <ScreenHeader Title="Book a Court">
+        <LeftContent>
+            <button class="back-btn" @onclick="NavigateHome" aria-label="Back">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+                    <path d="M16 8L8 16L16 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 16H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </LeftContent>
+    </ScreenHeader>
 
     <div class="step-indicator">
         <div class="step @(CurrentStep >= 0 ? "active" : "")">
@@ -62,7 +60,7 @@
     
     <div class="section-header">
         <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow-book">SELECT COURT</span>
+            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">SELECT COURT</span>
         </div>
         </div>
     <div class="courts-carousel-book">
@@ -83,7 +81,7 @@
     </div>
     <div class="step-content">
         <div class="section-header">
-            <span class="section-eyebrow-book">SELECT DATE</span>
+            <span class="section-eyebrow-book" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">SELECT DATE</span>
         </div>
         <div class="date-strip">
             @foreach (var item in GetWeekDays())
@@ -101,7 +99,7 @@
         </div>
 
         <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow-book">DURATION</span>
+            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">DURATION</span>
         </div>
         <div class="duration-options">
             <button class="duration-option @(SelectedDuration == 60 ? "selected" : "")"
@@ -115,7 +113,7 @@
         </div>
 
         <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow-book">PICK A TIME</span>
+            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">PICK A TIME</span>
         </div>
         <div class="time-grid">
             @foreach (var slot in GetTimeSlots())
@@ -133,7 +131,7 @@
         </div>
 
         <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow-book">INVITE PLAYERS</span>
+            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">INVITE PLAYERS</span>
         </div>
         <div class="invite-players">
             <div class="game-players">
@@ -176,7 +174,7 @@
 
         <div class="summary-card">
             <div class="section-header-book">
-                <span class="section-eyebrow-book">BOOKING SUMMARY</span>
+                <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">BOOKING SUMMARY</span>
             </div>
             <div class="summary-row">
                 <span class="summary-label">Court</span>
@@ -291,20 +289,20 @@
     }
     private void NavigateHome()
     {
-        NavigationManager.NavigateTo("/");
+        NavState.NavigateTo("home");
     }
     private void NavigateBack()
     {
-        NavigationManager.NavigateTo("/courts");
+        NavState.NavigateTo("courts");
     }
     private void NavigateToBook()
     {
-        NavigationManager.NavigateTo("/book");
+        NavState.NavigateTo("book");
     }
 
     private void NavigateMyGames()
     {
-        NavigationManager.NavigateTo("/mygames");
+        NavState.NavigateTo("mygames");
     }
     private bool HasAvailableSlots(DateTime date)
     {

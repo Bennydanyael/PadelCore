@@ -1,38 +1,54 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
+@using PadelScore.Components.Pages
+@using PadelScore.Utils.Containers
 
-@* <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@inject NavigationState NavState
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
- *@
-
- <div class="app-container">
-    <!-- Main Content -->
+<div class="app-container">
     <div class="main-content">
-        @Body
+        @switch (NavState.CurrentTab)
+        {
+            case "home":
+                <Home />
+                break;
+            case "courts":
+                <Courts />
+                break;
+            case "book":
+                <Book />
+                break;
+            case "mygames":
+                <MyGames />
+                break;
+            case "passes":
+                <Passes />
+                break;
+            default:
+                <Home />
+                break;
+        }
     </div>
-    
-    <!-- Bottom Navigation -->
-    @* <BottomNav ActiveTab="@CurrentTab" OnNavigate="@HandleNavigation" /> *@
-</div> 
-@* 
+    <TabBar />
+</div>
+
 @code {
     [Parameter] public string CurrentTab { get; set; } = "home";
     [Parameter] public EventCallback<string> OnNavigate { get; set; }
+
+    protected override void OnInitialized()
+    {
+        NavState.OnChange += StateHasChanged;
+        base.OnInitialized();
+    }
 
     private void HandleNavigation(string tab)
     {
         OnNavigate.InvokeAsync(tab);
     }
-} *@
+
+    public void Dispose()
+    {
+        NavState.OnChange -= StateHasChanged;
+    }
+}

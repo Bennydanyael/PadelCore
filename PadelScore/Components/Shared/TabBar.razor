@@ -1,0 +1,62 @@
+@implements IDisposable
+@inject NavigationState NavState
+
+@using Microsoft.AspNetCore.Components.Routing
+@using PadelScore.Utils.Containers
+
+<nav class="bottom-nav" style="padding-bottom:10px;">
+	@foreach (var _menu in _menuItems)
+	{
+		<button class="nav-item @(NavState.CurrentTab == _menu.TabName ? "active" : "")"
+				@onclick="() => HandleNavigation(_menu.TabName, _menu.Url)">
+			<span class="nav-icon">@_menu.Icon</span>
+			<span class="nav-label">@_menu.Label</span>
+		</button>
+	}
+</nav>
+
+@code {
+	[Parameter] 
+	public string ActiveTab { get; set; } = "";
+	private MenuItem[] _menuItems = [];
+	private string _selectedPage = PageRoutes.Home;
+
+	protected override void OnInitialized()
+	{
+		_menuItems = [
+		new ("Home", "🏠", "home", PageRoutes.Home),
+		new ("Courts", "🏖️", "courts", PageRoutes.Courts),
+		new ("Book", "📅", "book", PageRoutes.Book),
+		new ("My Games", "🏓", "mygames", PageRoutes.MyGames),
+		new ("Passes", "🎫", "passes", PageRoutes.Passes)
+		];
+
+		NavState.OnChange += StateHasChanged;
+	}
+
+	private void HandleNavigation(string tabName, string url)
+	{
+		_selectedPage = url;
+		NavState.NavigateTo(tabName);
+	}
+
+	private void Dispose()
+	{
+		NavState?.OnChange -= StateHasChanged;
+	}
+
+	void IDisposable.Dispose()
+	{
+		Dispose();
+	}
+
+	private record struct MenuItem(string Label, string Icon, string TabName, string Url);
+	private static class PageRoutes
+	{
+		public const string Home = "/";
+		public const string Courts = "/courts";
+		public const string Book = "/book";
+		public const string MyGames = "/mygames";
+		public const string Passes = "/passes";
+	}
+}

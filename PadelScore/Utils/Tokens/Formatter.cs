@@ -14,7 +14,11 @@ public static class Formatter
         var culture = new CultureInfo("id-ID");
         return date.ToString("dd MMM", culture);
     }
-
+    public static string FormatDateYear(DateTime date)
+    {
+        var culture = new CultureInfo("id-ID");
+        return date.ToString("dd MMMM yyyy", culture);
+    }
     public static string FormatNumber(int number)
     {
         var culture = new CultureInfo("id-ID");

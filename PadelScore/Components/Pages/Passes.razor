@@ -1,0 +1,275 @@
+﻿@page "/passes"
+
+@using Models
+@using Utils.Tokens
+@using System.Text.RegularExpressions
+
+@inject Services.DataService Data
+@inject PadelScore.Utils.Containers.NavigationState NavState
+
+<div class="passes-screen">
+    <div class="app-bar-book">
+        <div class="app-bar-left">
+            <button class="back-btn" @onclick="NavigateHome" aria-label="Back">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3" />
+                    <path d="M16 8L8 16L16 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 16H24" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+            <div class="title-section">
+                <span class="screen-title">Court Passes</span>
+                <span class="location-icon-courts">
+                    <span class="location-text">
+                        Save more, play more
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-content">
+        <CurrentPassCard PassName="Regular Pass"
+                         TotalSessions="@Data.User.Pass.TotalSessions"
+                         UsedSessions="@Data.User.Pass.UsedSessions"
+                         ExpiryDate="@Formatter.FormatDateYear(Data.User.Pass.Expiry)"
+                         IsActive="@Data.User.Pass.IsActive" />
+        
+        <div class="title-section">
+            <span class="section-eyebrow">AVAILABLE PASSES</span>
+            <h3 class="section-title">Choose Your Pass</h3>
+        </div>
+
+        <div class="passes-scroll">
+            <div class="passes-list">
+                @foreach (var pass in Data.Passes)
+                {
+                   <PassCard Name="@pass.Name"
+                              Price="@pass.Price"
+                              PerSessionPrice="@pass.PerSessionPrice"
+                              Validity="@pass.Validity"
+                              Features="@pass.Features"
+                              Color="@pass.Color"
+                              BackgroundColor="@GetBackgroundColor(pass)"
+                              ImagePath="@pass.ImagePath"
+                              IsBestValue="@pass.IsBestValue"
+                              IsSelected="@(SelectedPass?.Name == pass.Name)"
+                              OnSelect="() => SelectPass(pass)" />
+                }
+            
+            </div>
+        </div>
+
+        <div class="membership-card">
+            <div class="membership-header">
+                <div class="membership-header-left">
+                    <svg width="24px" height="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 15.744 15.744" xml:space="preserve" fill="#000000">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> 
+                        <path style="fill:#8000ff;" d="M4.198,3.328c0.424,0,0.767,0.309,0.767,0.69c0,0.381-0.343,0.69-0.767,0.69S3.43,4.399,3.43,4.018 S3.774,3.328,4.198,3.328z M7.699,3.446c0.726,0,1.315-0.528,1.315-1.181S8.424,1.082,7.699,1.082 c-0.724,0-1.314,0.53-1.314,1.183S6.975,3.446,7.699,3.446z M11.491,3.368c0.423,0,0.767,0.309,0.767,0.69 c0,0.381-0.343,0.69-0.767,0.69c-0.423,0-0.767-0.309-0.767-0.69S11.068,3.368,11.491,3.368z M2.954,12.296h9.49v2.365h-9.49 V12.296z M14.432,2.619c0.725,0,1.312,0.529,1.312,1.182s-0.588,1.182-1.312,1.182c-0.725,0-1.312-0.529-1.312-1.182 S13.707,2.619,14.432,2.619z M2.628,3.846c0-0.655-0.589-1.183-1.315-1.183C0.589,2.663,0,3.191,0,3.846 c0,0.651,0.589,1.182,1.312,1.182C2.04,5.028,2.628,4.497,2.628,3.846z M13.346,5.122c-0.112,0-0.242,0.024-0.394,0.083 l-1.8,1.618l0.151-1.651c0,0-0.124-0.189-0.313-0.189c-0.077,0-0.165,0.032-0.257,0.119L9.644,6.495L8.223,4.259 c0,0-0.174-0.178-0.486-0.178c-0.156,0-0.346,0.045-0.566,0.178L5.787,6.44L4.849,5.103c0,0-0.102-0.162-0.258-0.162 c-0.082,0-0.179,0.046-0.284,0.186l0.098,1.799L2.632,5.205c0,0-0.113-0.046-0.262-0.046c-0.177,0-0.405,0.066-0.548,0.356 l1.145,6.31h9.461l1.577-6.147C14.004,5.678,13.884,5.122,13.346,5.122z M11.388,10.485H4.086L3.639,8.024 c0.227,0.159,0.496,0.241,0.767,0.241c0.189,0,0.378-0.04,0.556-0.121C5.165,8.051,5.338,7.911,5.469,7.74 c0.103,0.026,0.21,0.039,0.319,0.039c0.011,0,0.021,0,0.031,0c0.449-0.011,0.861-0.244,1.1-0.622L7.698,5.93l0.816,1.284 c0.232,0.368,0.63,0.599,1.064,0.619C9.6,7.834,9.623,7.835,9.645,7.835c0.18,0,0.359-0.037,0.522-0.106 c0.107,0.118,0.237,0.217,0.386,0.291c0.19,0.095,0.395,0.142,0.601,0.142c0.324,0,0.645-0.117,0.896-0.343l0.032-0.029 C12.081,7.791,11.388,10.485,11.388,10.485z"></path> </g> </g> </g></svg>
+                    <span class="membership-eyebrow">MEMBERSHIP</span>
+                </div>
+                    <span class="membership-title">PadelCore Member</span>
+            </div>
+            <div class="membership-features">
+                <div class="membership-feature">
+                    <svg viewBox="0 0 512 512" width="24px" height="24px" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#A78BFA"><g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
+                        .st0 {
+                        fill: #A78BFA;
+                        }
+
+                        .st1 {
+                        fill: #A78BFA;
+                        }
+                    </style> <g> 
+                    <path class="st0" fill="#A78BFA" d="M256,470c-118,0-214-96-214-214S138,42,256,42s214,96,214,214S374,470,256,470z M256,66 C151.2,66,66,151.2,66,256s85.2,190,190,190s190-85.2,190-190S360.8,66,256,66z"></path> </g> <g> 
+                    <path class="st1" fill="#A78BFA" d="M231.5,331.5c-6,0-11.8-2.5-15.9-6.8l-55.3-57.9c-4.6-4.8-4.4-12.4,0.4-17c4.8-4.6,12.4-4.4,17,0.4l53.8,56.3 l102.4-121.8c4.3-5.1,11.8-5.7,16.9-1.5c5.1,4.3,5.7,11.8,1.5,16.9L248.4,323.7c-4,4.8-9.9,7.6-16.1,7.8 C232,331.5,231.8,331.5,231.5,331.5z"></path> </g> </g></svg>
+                    <span>Unlimited court access</span>
+                </div>
+                <div class="membership-feature">
+                    <svg viewBox="0 0 512 512" width="24px" height="24px" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#A78BFA"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
+                        .st0 {
+                        fill: #A78BFA;
+                        }
+
+                        .st1 {
+                        fill: #A78BFA;
+                        }
+                    </style> <g> <path class="st0" d="M256,470c-118,0-214-96-214-214S138,42,256,42s214,96,214,214S374,470,256,470z M256,66 C151.2,66,66,151.2,66,256s85.2,190,190,190s190-85.2,190-190S360.8,66,256,66z"></path> </g> <g> 
+                    <path class="st1" d="M231.5,331.5c-6,0-11.8-2.5-15.9-6.8l-55.3-57.9c-4.6-4.8-4.4-12.4,0.4-17c4.8-4.6,12.4-4.4,17,0.4l53.8,56.3 l102.4-121.8c4.3-5.1,11.8-5.7,16.9-1.5c5.1,4.3,5.7,11.8,1.5,16.9L248.4,323.7c-4,4.8-9.9,7.6-16.1,7.8 C232,331.5,231.8,331.5,231.5,331.5z"></path> </g> </g></svg>
+                    <span>Priority booking · 7 days ahead</span>
+                </div>
+                <div class="membership-feature">
+                    <svg viewBox="0 0 512 512" width="24px" height="24px" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
+                        .st0 {
+                        fill: #A78BFA;
+                        }
+
+                        .st1 {
+                        fill: #A78BFA;
+                        }
+                    </style> <g> <path class="st0" d="M256,470c-118,0-214-96-214-214S138,42,256,42s214,96,214,214S374,470,256,470z M256,66 C151.2,66,66,151.2,66,256s85.2,190,190,190s190-85.2,190-190S360.8,66,256,66z"></path> </g> <g> 
+                    <path class="st1" d="M231.5,331.5c-6,0-11.8-2.5-15.9-6.8l-55.3-57.9c-4.6-4.8-4.4-12.4,0.4-17c4.8-4.6,12.4-4.4,17,0.4l53.8,56.3 l102.4-121.8c4.3-5.1,11.8-5.7,16.9-1.5c5.1,4.3,5.7,11.8,1.5,16.9L248.4,323.7c-4,4.8-9.9,7.6-16.1,7.8 C232,331.5,231.8,331.5,231.5,331.5z"></path> </g> </g></svg>
+                    <span>1 free pro coaching/month</span>
+                </div>
+                <div class="membership-feature">
+                    <svg viewBox="0 0 512 512" width="24px" height="24px" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
+                    .st0 {
+                    fill: #A78BFA;
+                    }
+
+                    .st1 {
+                        fill: #A78BFA;
+                    }
+                </style> <g> <path class="st0" d="M256,470c-118,0-214-96-214-214S138,42,256,42s214,96,214,214S374,470,256,470z M256,66 C151.2,66,66,151.2,66,256s85.2,190,190,190s190-85.2,190-190S360.8,66,256,66z"></path> </g> <g> 
+                    <path class="st1" d="M231.5,331.5c-6,0-11.8-2.5-15.9-6.8l-55.3-57.9c-4.6-4.8-4.4-12.4,0.4-17c4.8-4.6,12.4-4.4,17,0.4l53.8,56.3 l102.4-121.8c4.3-5.1,11.8-5.7,16.9-1.5c5.1,4.3,5.7,11.8,1.5,16.9L248.4,323.7c-4,4.8-9.9,7.6-16.1,7.8 C232,331.5,231.8,331.5,231.5,331.5z"></path> </g> </g></svg>
+                    <span>Members-only lounge & locker</span>
+                </div>
+            </div>
+                <div class="membership-price-row">
+                    <div class="membership-price">
+                        <span class="price">@Formatter.FormatCurrency(399000)</span>
+                        <span class="period">per bulan - cancel anytime</span>
+                    </div>
+                    <button class="join-btn">Join Now</button>
+                </div>
+        </div>
+
+        <div class="title-section">
+            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">WHY PASS?</span>
+                <h3 class="section-title" style="justify-content: left;">Pass Benefits</h3>
+        </div>
+
+        <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon-wrapper" style="background:rgba(34, 211, 238, 0.05)">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="9" stroke="rgba(34, 211, 238, 1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 6V12" stroke="rgba(34, 211, 238, 1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16.24 16.24L12 12" stroke="rgba(34, 211, 238, 1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    </div>
+                <div class="benefit-content">
+                    <span class="benefit-title">Priority Booking</span>
+                    <span class="benefit-desc">More 7 days ahead</span>
+                </div>
+            </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon-wrapper" style="background: rgb(163, 230, 53, 0.05)">
+                        <svg class="facility-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 19V18C3 15.7909 4.79086 14 7 14H11C13.2091 14 15 15.7909 15 18V19M15 11C16.6569 11 18 9.65685 18 8C18 6.34315 16.6569 5 15 5M21 19V18C21 15.7909 19.2091 14 17 14H16.5M12 8C12 9.65685 10.6569 11 9 11C7.34315 11 6 9.65685 6 8C6 6.34315 7.34315 5 9 5C10.6569 5 12 6.34315 12 8Z"
+                                  stroke="rgb(163, 230, 53)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                <div class="benefit-content">
+                    <span class="benefit-title">Guest Passes</span>
+                    <span class="benefit-desc">2 free per month</span>
+                </div>
+            </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon-wrapper" style="background: rgba(245, 158, 11, 0.05)">
+                        <svg class="facility-icon" width="40px" height="40px" viewBox="0 0 24 24" fill="none" stroke="rgba(245, 158, 11, 1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" />
+                        <path d="M3 6H21" />
+                        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" />
+                    </svg>
+                    </div>
+                <div class="benefit-content">
+                    <span class="benefit-title">Pro Shop Discount</span>
+                    <span class="benefit-desc">15% off all gear</span>
+                </div>
+            </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon-wrapper">
+                        <svg width="40" height="40" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16" xml:space="preserve">
+                            <g id="SVGRepo_iconCarrier">
+                                <g>
+                                    <g>
+                                        <path style="fill:#A78BFA;" d="M4.198,3.328c0.424,0,0.767,0.309,0.767,0.69c0,0.381-0.343,0.69-0.767,0.69S3.43,4.399,3.43,4.018 S3.774,3.328,4.198,3.328z M7.699,3.446c0.726,0,1.315-0.528,1.315-1.181S8.424,1.082,7.699,1.082 c-0.724,0-1.314,0.53-1.314,1.183S6.975,3.446,7.699,3.446z M11.491,3.368c0.423,0,0.767,0.309,0.767,0.69 c0,0.381-0.343,0.69-0.767,0.69c-0.423,0-0.767-0.309-0.767-0.69S11.068,3.368,11.491,3.368z M2.954,12.296h9.49v2.365h-9.49 V12.296z M14.432,2.619c0.725,0,1.312,0.529,1.312,1.182s-0.588,1.182-1.312,1.182c-0.725,0-1.312-0.529-1.312-1.182 S13.707,2.619,14.432,2.619z M2.628,3.846c0-0.655-0.589-1.183-1.315-1.183C0.589,2.663,0,3.191,0,3.846 c0,0.651,0.589,1.182,1.312,1.182C2.04,5.028,2.628,4.497,2.628,3.846z M13.346,5.122c-0.112,0-0.242,0.024-0.394,0.083 l-1.8,1.618l0.151-1.651c0,0-0.124-0.189-0.313-0.189c-0.077,0-0.165,0.032-0.257,0.119L9.644,6.495L8.223,4.259 c0,0-0.174-0.178-0.486-0.178c-0.156,0-0.346,0.045-0.566,0.178L5.787,6.44L4.849,5.103c0,0-0.102-0.162-0.258-0.162 c-0.082,0-0.179,0.046-0.284,0.186l0.098,1.799L2.632,5.205c0,0-0.113-0.046-0.262-0.046c-0.177,0-0.405,0.066-0.548,0.356 l1.145,6.31h9.461l1.577-6.147C14.004,5.678,13.884,5.122,13.346,5.122z M11.388,10.485H4.086L3.639,8.024 c0.227,0.159,0.496,0.241,0.767,0.241c0.189,0,0.378-0.04,0.556-0.121C5.165,8.051,5.338,7.911,5.469,7.74 c0.103,0.026,0.21,0.039,0.319,0.039c0.011,0,0.021,0,0.031,0c0.449-0.011,0.861-0.244,1.1-0.622L7.698,5.93l0.816,1.284 c0.232,0.368,0.63,0.599,1.064,0.619C9.6,7.834,9.623,7.835,9.645,7.835c0.18,0,0.359-0.037,0.522-0.106 c0.107,0.118,0.237,0.217,0.386,0.291c0.19,0.095,0.395,0.142,0.601,0.142c0.324,0,0.645-0.117,0.896-0.343l0.032-0.029 C12.081,7.791,11.388,10.485,11.388,10.485z"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="benefit-content">
+                        <span class="benefit-title">Lounge Access</span>
+                        <span class="benefit-desc">Members-only lounge</span>
+                    </div>
+                </div>
+        </div>
+
+        <button class="buy-btn" @onclick="BuyPass" disabled="@(SelectedPass == null)">
+            @if (SelectedPass != null)
+            {
+                <text>Buy @SelectedPass.Name Pass · @Formatter.FormatCurrency(SelectedPass.Price)</text>
+            }
+            else
+            {
+                <text>Buy Reguler pass</text>
+            }
+        </button>
+        <div class="footer-text">
+            <span class="footer-info">Sesi aktif mulai dari hari pembelian • 6 bulan</span>
+            <div class="footer-prints">
+                <span class="footer-print">🔒 Aman dan Terenskripsi</span>
+                <span class="footer-print">✅ No Hidden Fees</span>
+                <span class="footer-print">🔁 Refundable</span>
+            </div>
+        </div>
+
+        <div class="bottom-spacer"></div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback<string> OnNavigate { get; set; }
+    private string _color = "";
+    private User User => Data.User;
+    private Pass? SelectedPass;
+    private bool CanBuyPass => SelectedPass != null;
+    private void BuyPass()
+    {
+        if (SelectedPass != null)
+        {
+            Console.WriteLine($"Buying {SelectedPass.Name} pass");
+        }
+    }
+    private async Task NavigateHome()
+    {
+        NavState.NavigateTo("home");
+    }
+
+    private string GetBackgroundColor(Pass pass)
+    {
+        if (string.IsNullOrEmpty(pass.Color)) return "rgba(255,255,255,0.3)";
+        if (pass.Color.StartsWith("rgb("))
+        {
+            var match = Regex.Match(pass.Color, @"rgb\((\d+),\s*(\d+),\s*(\d+)\)");
+            if (match.Success)
+            {
+                var r = match.Groups[1].Value;
+                var g = match.Groups[2].Value;
+                var b = match.Groups[3].Value;
+                return $"rgba({r}, {g}, {b}, 0.3)"; 
+            }
+        }
+        if (pass.Color.StartsWith("rgba("))
+        {
+            return Regex.Replace(pass.Color, @"0\.\d+", "0.6");
+        }
+
+        return "rgba(255,255,255,0.3)";
+    }
+
+    private double GetProgressPercentage()
+    {
+        return Data.User.Pass.TotalSessions > 0 
+            ? (double)Data.User.Pass.UsedSessions / Data.User.Pass.TotalSessions * 100 
+            : 0;
+    }
+    private void SelectPass(Pass pass)
+    {
+        SelectedPass = SelectedPass?.Name == pass.Name ? null : pass;
+        StateHasChanged();
+    }
+}

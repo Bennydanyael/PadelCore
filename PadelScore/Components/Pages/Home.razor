@@ -1,13 +1,10 @@
 ﻿@page "/"
 
-@using Models
 @using Utils.Tokens
-
 @inject Services.DataService Data
-@inject NavigationManager NavigationManager
+@inject PadelScore.Utils.Containers.NavigationState NavState
 
 <div class="home-screen">
-    <!-- App Bar -->
     <div class="app-bar">
         <div class="app-bar-content">
             <div class="location-section">
@@ -48,7 +45,7 @@
             <div class="pass-info">
                 <div class="pass-title-group">
                     <span class="pass-tier">REGULAR PASS</span>
-                    <span class="sessions-left">@($"{Data.User.Pass.RemainingSessions} sessions left")</span>
+                        <span class="sessions-left">@($"{Data.User.Pass.RemainingSessions} sessions left")</span>
                 </div>
             </div>
             <Pill Status="Active" />
@@ -56,28 +53,26 @@
         <div class="progress-section">
             <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
                 <span style="font-size: 12px; color: rgba(255,255,255,0.5);">Sessions used</span>
-                <span style="font-size: 12px; color: rgba(0, 255, 255, 0.7);; font-weight: 600;">
+                <span style="font-size: 12px; color: rgba(0, 255, 255, 0.7); font-weight: 600;">
                     @($"{Data.User.Pass.UsedSessions} / {Data.User.Pass.TotalSessions}")
                 </span>
             </div>
 
-            <!-- Progress Bar -->
             <div class="progress-bar">
                 <div class="progress-bar-fill"
                         style="width: @(Math.Min((double)0 / Data.User.Pass.TotalSessions * 100, 100))%">
                 </div>
             </div>
 
-            <div class="expiry-buy-row">
+                <div class="expiry-buy-row">
                 <span class="expiry-label">Expires @Utils.Tokens.Formatter.FormatDate(Data.User.Pass.Expiry)</span>
-                <button class="buy-more-btn" @onclick="NavigateToMyGames">
+                    <button class="buy-more-btn" @onclick="NavigateToPasses">
                     Buy More >
                 </button>
             </div>
         </div>
     </div>
 
-        <!-- Live Status Section -->
         <div class="section-header">
             <div>
                 <span class="section-eyebrow">LIVE STATUS</span>
@@ -88,7 +83,6 @@
             </button>
         </div>
 
-        <!-- Live Courts Carousel -->
         <div class="courts-carousel-home">
             @foreach (var court in Data.CourtsHome)
             {
@@ -233,21 +227,21 @@
     [Parameter] public EventCallback<string> OnNavigate { get; set; }
     private User User => Data.User;
 
-    private void NavigateToBook() 
+    private void NavigateToBook()
     {
-        NavigationManager.NavigateTo("/book");
+        NavState.NavigateTo("book");
     }
     private void NavigateToPasses()
     {
-        NavigationManager.NavigateTo("/passes");
+        NavState.NavigateTo("passes");
     }
-    private void NavigateToCourts() 
+    private void NavigateToCourts()
     {
-        NavigationManager.NavigateTo("/courts");
+        NavState.NavigateTo("courts");
     }
-    private void NavigateToMyGames() 
+    private void NavigateToMyGames()
     {
-        NavigationManager.NavigateTo("/mygames");
+        NavState.NavigateTo("mygames");
     }
 
     private List<string> GetPlayers()

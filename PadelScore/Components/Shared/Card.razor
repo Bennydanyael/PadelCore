@@ -1,0 +1,10 @@
+@* Simple card wrapper component *@
+@namespace PadelScore.Components.Shared
+
+<div class="card">
+	@ChildContent
+</div>
+
+@code {
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+}

@@ -1,0 +1,59 @@
+﻿@using Models
+@using Utils.Tokens
+
+<div class="pass-card @(IsBestValue ? "best-value" : "") @(IsSelected ? "selected" : "")"
+     @onclick="async () => await OnSelect.InvokeAsync()"
+     style="border-color:@Color; background:@BackgroundColor;">
+    
+    @if (IsBestValue)
+    {
+        <span class="best-value-badge">BEST VALUE</span>
+    }
+    
+    @if (!string.IsNullOrEmpty(ImagePath))
+    {
+        <div class="court-image-wrapper">
+            <img src="@ImagePath" alt="@Name" class="court-image" />
+        </div>
+    }
+    
+    <div class="pass-card-header">
+        <span class="pass-card-name">@Name</span>
+        <span class="pass-card-price" style="color:@Color;">@Formatter.FormatCurrency(Price)</span>
+    </div>
+    
+    <div class="pass-card-meta">
+        <span class="per-session">Rp @PerSessionPrice/session · @Validity</span>
+    </div>
+    
+    <div class="pass-features">
+        @foreach (var feature in Features)
+        {
+            <div class="feature-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>@feature</span>
+            </div>
+        }
+    </div>
+    
+    @if (IsSelected)
+    {
+        <span class="check-mark">✓</span>
+    }
+</div>
+
+@code {
+    [Parameter] public string Name { get; set; } = string.Empty;
+    [Parameter] public decimal Price { get; set; }
+    [Parameter] public string PerSessionPrice { get; set; }
+    [Parameter] public string Validity { get; set; } = string.Empty;
+    [Parameter] public string[] Features { get; set; } = Array.Empty<string>();
+    [Parameter] public string Color { get; set; } = "#22D3EE";
+    [Parameter] public string BackgroundColor { get; set; } = "rgba(255,255,255,0.03)";
+    [Parameter] public string ImagePath { get; set; } = string.Empty;
+    [Parameter] public bool IsBestValue { get; set; }
+    [Parameter] public bool IsSelected { get; set; }
+    [Parameter] public EventCallback OnSelect { get; set; }
+}

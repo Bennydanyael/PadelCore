@@ -15,6 +15,6 @@
     private double GetPercentage()
     {
         if (Max <= 0) return 0;
-        return Math.Min((double)Value / Max * 100, 100);
+        return Math.Min((double)(Value / Max * 100) - 2, 100);
     }
 }

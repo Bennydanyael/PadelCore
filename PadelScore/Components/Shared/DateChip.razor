@@ -1,0 +1,16 @@
+@* Date chip used in booking date strip *@
+@namespace PadelScore.Components.Shared
+
+<div class="date-chip @(Selected ? "selected" : "")" @onclick="HandleClick">
+	<div class="day">@DisplayDay</div>
+	<div class="number">@Date.Day</div>
+</div>
+
+@code {
+	[Parameter] public DateTime Date { get; set; }
+	[Parameter] public bool Selected { get; set; }
+	[Parameter] public EventCallback<DateTime> OnClick { get; set; }
+
+	private string DisplayDay => Date.ToString("ddd");
+	private Task HandleClick() => OnClick.InvokeAsync(Date);
+}

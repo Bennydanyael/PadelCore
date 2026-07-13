@@ -1,0 +1,14 @@
+@namespace PadelScore.Components.Shared
+@if (!string.IsNullOrEmpty(IconContent))
+{
+	<span class="icon">@((MarkupString)IconContent)</span>
+}
+else
+{
+	<span class="icon">@ChildContent</span>
+}
+
+@code {
+	[Parameter] public string IconContent { get; set; } = string.Empty;
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+}

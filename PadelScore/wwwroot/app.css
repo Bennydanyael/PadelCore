@@ -128,17 +128,16 @@ h1:focus {
 .home-screen {
     background: #050B14;
     min-height: 100vh;
-    width: 100%; /* Full width */
-    max-width: 100%; /* Remove max-width restriction */
+    width: 100%; 
+    max-width: 100%; 
     margin: 0;
-    padding: 0; /* Remove padding */
+    padding-bottom: 40px; 
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
 }
 
-/* App Bar - with horizontal padding */
 .app-bar {
     padding: 12px 16px 8px 16px;
     position: sticky;
@@ -227,10 +226,9 @@ h1:focus {
     font-size: 10px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.3);
-    display: none; /* Hide on mobile, show only on tablet/desktop */
+    display: none;
 }
 
-/* Show greeting on larger screens */
 @media (min-width: 420px) {
     .greeting {
         display: inline;
@@ -295,11 +293,10 @@ h1:focus {
     }
 }
 
-/* Scroll Content */
 .scroll-content {
     flex: 1;
     overflow-y: auto;
-    padding: 12px 16px 80px 16px; /* Add horizontal padding here */
+    padding: 12px 16px 80px 16px; 
     scrollbar-width: none;
 }
 
@@ -307,7 +304,6 @@ h1:focus {
         display: none;
     }
 
-/* Pass Card */
 .pass-card {
     background: rgba(5, 11, 20, 0.95);
     border: 1.5px solid rgba(34, 211, 238, 0.4);
@@ -341,8 +337,6 @@ h1:focus {
     overflow: hidden;
     box-shadow: 0 0 30px rgba(34, 211, 238, 0.05);
 }
-
-    /* Inner glow effect - subtle cyan glow inside card */
     .pass-card::before {
         content: '';
         position: absolute;
@@ -366,8 +360,6 @@ h1:focus {
         transform: scale(1.02);
     }
 }
-
-    /* Border glow animation - pulsing cyan border */
     .pass-card::after {
         content: '';
         position: absolute;
@@ -385,8 +377,6 @@ h1:focus {
     .pass-card:hover::after {
         opacity: 1;
     }
-
-/* Ensure all content is above the pseudo-elements */
 .pass-header,
 .progress-section,
 .buy-more-btn {
@@ -400,7 +390,6 @@ h1:focus {
     transform: translateY(-2px);
 }
 
-/* Optional: Subtle cyan glow on the card edges */
 .pass-card {
     box-shadow: 0 0 20px rgba(34, 211, 238, 0.03), inset 0 0 20px rgba(34, 211, 238, 0.02);
 }
@@ -431,20 +420,18 @@ h1:focus {
     letter-spacing: -0.3px;
     line-height: 1.2;
 }
-/* Progress Section */
 .progress-section {
     margin: 12px 0 8px 0;
     width: 100%;
 }
     
-/* Sessions used dan 2/10 dalam satu baris */
 .progress-row {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
     margin-bottom: 6px;
     width: 100%;
-    background: rgba(255, 0, 0, 0.1); /* Temporary - merah transparan */
+    background: rgba(255, 0, 0, 0.1);
 }
 
 .progress-label {
@@ -452,7 +439,7 @@ h1:focus {
     color: rgba(255, 255, 255, 0.5);
     font-weight: 500;
     text-align: left;
-    background: rgba(0, 255, 0, 0.1); /* Temporary - hijau transparan */
+    background: rgba(0, 255, 0, 0.1);
 }
 
 .progress-value {
@@ -460,10 +447,9 @@ h1:focus {
     color: rgba(255, 255, 255, 0.7);
     font-weight: 600;
     text-align: right;
-    background: rgba(0, 0, 0, 0.1); /* Temporary - biru transparan */
+    background: rgba(0, 0, 0, 0.1);
 }
 
-/* Progress Bar */
 .progress-bar {
     width: 100%;
     height: 6px;
@@ -481,8 +467,6 @@ h1:focus {
     position: relative;
     min-width: 0;
 }
-
-    /* Shimmer animation */
     .progress-bar-fill::after {
         content: '';
         position: absolute;
@@ -504,7 +488,6 @@ h1:focus {
     }
 }
 
-/* Label inside progress bar (optional) */
 .progress-label {
     position: absolute;
     top: 50%;
@@ -516,7 +499,6 @@ h1:focus {
     white-space: nowrap;
 }
 
-/* Expires - di bawah progress bar */
 .expiry-buy-row {
     display: flex;
     justify-content: space-between;
@@ -530,9 +512,9 @@ h1:focus {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.4);
     font-weight: 400;
+    justify-content: space-between;
 }
 
-/* Buy More Button - No margin-top needed anymore */
 .buy-more-btn {
     background: none;
     border: none;
@@ -569,7 +551,6 @@ h1:focus {
     }
 }
 
-/* Section Header */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -578,7 +559,7 @@ h1:focus {
 }
 
 .section-eyebrow {
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 700;
     color: #22D3EE;
     text-transform: uppercase;
@@ -597,7 +578,6 @@ h1:focus {
     margin-top: 12px;
 }
 
-/* Courts Carousel */
 .courts-carousel-home {
     display: flex;
     gap: 12px;
@@ -611,7 +591,6 @@ h1:focus {
         display: none;
     }
 
-/* Availability Dot di pojok kanan bawah gambar */
 .availability-dot-green {
     width: 12px;
     height: 12px;
@@ -621,7 +600,7 @@ h1:focus {
     box-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
     animation: pulse-dot 2s ease-in-out infinite;
     flex-shrink: 0;
-    position: relative; /* Bukan absolute */
+    position: relative;
     margin-left: auto;
 }
 .availability-dot-red {
@@ -637,7 +616,6 @@ h1:focus {
     animation: pulse-dot 2s ease-in-out infinite;
     z-index: 2;
 }
-/* Court Card - Gambar Full Width di Atas */
 .court-card-home {
     min-width: 140px;
     max-width: 160px;
@@ -645,7 +623,7 @@ h1:focus {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
-    overflow: hidden; /* Penting: agar gambar mengikuti border-radius */
+    overflow: hidden; 
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -659,7 +637,6 @@ h1:focus {
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
-/* Gambar - Full Width, Segaris dengan Card */
 .court-image-wrapper-home {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -673,7 +650,7 @@ h1:focus {
 .court-image-home {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Gambar memenuhi seluruh wrapper */
+    object-fit: cover; 
     display: block;
 }
 
@@ -711,11 +688,10 @@ h1:focus {
     font-weight: 700;
     color: #FFFFFF;
     margin: 0;
-    flex: 0 0 auto; /* Ubah dari flex: 1 ke auto */
-    text-align: left; /* Pastikan teks rata kiri */
+    flex: 0 0 auto; 
+    text-align: left;
 }
 
-/* Jika ada elemen lain di row (seperti dot) yang ingin di sebelah kanan */
 .court-name-row .availability-dot-green {
     margin-left: auto; 
     flex-shrink: 0;
@@ -729,7 +705,7 @@ h1:focus {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Rata kiri */
+    align-items: flex-start;
     gap: 4px;
     padding: 10px 12px 12px 12px;
     position: relative;
@@ -760,7 +736,6 @@ h1:focus {
     margin: 2px 0 6px 0;
 }
 
-/* Primary Button di dalam court card */
 .primary-button {
     padding: 12px 24px;
     border-radius: 12px;
@@ -786,28 +761,9 @@ h1:focus {
         box-shadow: none;
     }
 
-/* Upcoming Game Section */
 .upcoming-section {
     margin: 16px 0;
 }
-
-/* Section Header */
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: 12px;
-}
-
-.section-eyebrow {
-    font-size: 9px;
-    font-weight: 700;
-    color: #22D3EE;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: block;
-}
-
 .section-title {
     font-size: 17px;
     font-weight: 700;
@@ -827,7 +783,6 @@ h1:focus {
         border-color: rgba(34, 211, 238, 0.15);
     }
 
-/* Game Header - Court Name dan Schedule */
 .game-header {
     display: flex;
     justify-content: space-between;
@@ -852,7 +807,6 @@ h1:focus {
     white-space: nowrap;
 }
 
-/* Countdown Row - STARTS IN dan 9h 19m sejajar */
 .countdown-row {
     display: flex;
     justify-content: space-between;
@@ -864,7 +818,7 @@ h1:focus {
 .game-time-label {
     font-size: 15px;
     font-weight: 900;
-    color: #A3E635;
+    color: rgb(163, 230, 53);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -877,7 +831,6 @@ h1:focus {
     letter-spacing: 0px;
 }
 
-/* Game Players */
 .game-players {
     margin: 12px 0;
 }
@@ -986,7 +939,6 @@ h1:focus {
     width: 18px;
     height: 18px;
 }
-
     .capacity-icon.icon-1 {
         opacity: 1;
         z-index: 2;
@@ -1015,7 +967,6 @@ h1:focus {
         opacity: 0.7;
     }
 
-/* Ranking List */
 .ranking-list {
     display: flex;
     flex-direction: column;
@@ -1157,8 +1108,6 @@ h1:focus {
     color: #22D3EE;
     margin-left: 2px;
 }
-
-/* Primary Button */
 .primary-button {
     width: 100%;
     padding: 14px;
@@ -1177,7 +1126,6 @@ h1:focus {
         transform: scale(0.98);
     }
 
-/* Bottom Spacer */
 .bottom-spacer {
     height: 20px;
 }

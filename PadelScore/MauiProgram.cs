@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using PadelScore.Services;
+using PadelScore.Utils.Containers;
 
 namespace PadelScore
 {
@@ -17,6 +18,7 @@ namespace PadelScore
 
             builder.Services.AddMauiBlazorWebView();
             builder.Services.AddSingleton<DataService>();
+            builder.Services.AddSingleton<NavigationState>();
 #if DEBUG
             builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();

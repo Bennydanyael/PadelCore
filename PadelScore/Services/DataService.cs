@@ -2,7 +2,6 @@
 
 namespace PadelScore.Services
 {
-
     public class DataService
     {
         public User User { get; set; } = new();
@@ -19,7 +18,6 @@ namespace PadelScore.Services
 
         private void InitializeData()
         {
-            // Home data
             User = new User
             {
                 Name = "Alex",
@@ -188,7 +186,6 @@ namespace PadelScore.Services
             },
         };
 
-            // Games data
             Games = new List<Game>
         {
             new()
@@ -248,48 +245,49 @@ namespace PadelScore.Services
                 }
             });
 
-            // Passes data
             Passes = new List<Pass>
         {
             new()
             {
                 Name = "Starter",
                 Emoji = "🚀",
-                Color = "#A3E635",
+                Color = "rgb(163, 230, 53)",
                 TotalSessions = 5,
-                Price = 350000,
-                PerSessionPrice = 70000,
-                Validity = "30 days",
-                Features = new[] { "Basic court access", "Equipment rental" },
-                IsBestValue = false
+                Price = 600000,
+                PerSessionPrice = "120k",
+                Validity = "3 bulan",
+                Features = new[] { "5 court sessions", "All court types", "Valid 3 months", "App booking" },
+                IsBestValue = false,
+                ImagePath = "Images/Passes.png"
             },
             new()
             {
                 Name = "Regular",
                 Emoji = "⭐",
-                Color = "#22D3EE",
+                Color = "rgb(34, 211, 238)",
                 TotalSessions = 10,
-                Price = 600000,
-                PerSessionPrice = 60000,
-                Validity = "60 days",
-                Features = new[] { "Priority booking", "Equipment rental", "Free water" },
-                IsBestValue = true
+                Price = 1100000,
+                PerSessionPrice = "110k",
+                Validity = "6 bulan",
+                Features = new[] { "10 court sessions", "All court types", "Valid 6 month", "Priority booking" },
+                IsBestValue = true,
+                ImagePath = "Images/CourtsA.png"
             },
             new()
             {
-                Name = "Elite",
+                Name = "Premium",
                 Emoji = "👑",
-                Color = "#F59E0B",
+                Color = "rgb(245, 158, 11)",
                 TotalSessions = 20,
-                Price = 1000000,
-                PerSessionPrice = 50000,
-                Validity = "90 days",
-                Features = new[] { "VIP lounge access", "Free coaching", "Premium equipment", "Guest passes" },
-                IsBestValue = false
+                Price = 2100000,
+                PerSessionPrice = "210k",
+                Validity = "9 bulan",
+                Features = new[] { "15 court sessions", "All court types", "Valid 9 month", "Premium booking" },
+                IsBestValue = false,
+                ImagePath = "Images/CourtsB.png"
             }
         };
 
-            // Rankings data
             Rankings = new List<Models.Ranking>
             {
                 new() { Rank = 1, Emoji = "🥇", Name = "Alex", Elo = 1842, Change = 12, Trend = "up" },

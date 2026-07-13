@@ -17,7 +17,7 @@ public class User
 public class UserPass
 {
     public string Name { get; set; } = "Regular Pass";
-    public int TotalSessions { get; set; } = 10;
+    public int TotalSessions { get; set; } = 0;
     public int UsedSessions { get; set; } = 0;
     public DateTime Expiry { get; set; } = DateTime.Now.AddDays(30);
     public bool IsActive { get; set; } = true;

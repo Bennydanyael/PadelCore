@@ -1,0 +1,99 @@
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0 env(safe-area-inset-bottom, 8px) 0;
+    background: rgba(5, 11, 20, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 100;
+    height: 72px;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    font-size: 10px;
+    transition: color 0.2s, transform 0.15s ease-out;
+    padding: 8px 12px;
+    min-width: 56px;
+    min-height: 56px;
+    position: relative;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+    .nav-item .nav-icon {
+        font-size: 22px;
+        line-height: 1.2;
+    }
+
+    .nav-item .nav-label {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    .nav-item:active {
+        transform: scale(0.95);
+    }
+
+    .nav-item.active {
+        color: #22D3EE;
+    }
+
+        .nav-item.active .nav-label {
+            font-weight: 600;
+        }
+
+    .nav-item::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        border-radius: 2px;
+        background: #22D3EE;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .nav-item.active::after {
+        opacity: 1;
+    }
+
+@media (hover: hover) {
+    .nav-item:hover {
+        color: rgba(34, 211, 238, 0.7);
+    }
+
+    .nav-item:hover::after {
+        opacity: 0.5;
+    }
+}
+
+@media (hover: none) {
+    .nav-item:active {
+        color: #22D3EE;
+        background: rgba(34, 211, 238, 0.1);
+        border-radius: 4px;
+    }
+
+    .nav-item:active::after {
+        opacity: 1;
+    }
+}

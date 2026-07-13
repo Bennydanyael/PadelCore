@@ -46,11 +46,12 @@ public class Pass
     public int TotalSessions { get; set; }
     public int UsedSessions { get; set; }
     public decimal Price { get; set; }
-    public decimal PerSessionPrice { get; set; }
+    public string PerSessionPrice { get; set; }
     public string Validity { get; set; } = string.Empty;
     public string[] Features { get; set; } = Array.Empty<string>();
     public bool IsActive { get; set; }
     public bool IsBestValue { get; set; }
+    public string ImagePath { get; set; }
 }
 
 public class Ranking

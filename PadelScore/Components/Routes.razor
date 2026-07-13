@@ -1,44 +1,87 @@
-﻿<Router AppAssembly="typeof(MauiProgram).Assembly" NotFoundPage="typeof(Pages.NotFound)">
-    <Found Context="routeData">
-        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
-        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+﻿@using PadelScore.Components.Layout
+@using PadelScore.Utils.Containers
+
+@inject NavigationState NavState
+@inject NavigationManager NavigationManager
+
+<Router AppAssembly="@typeof(MauiProgram).Assembly">
+    <Found>
+        <MainLayout />
     </Found>
+    <NotFound>
+        <div style="padding:20px; background:#050B14; min-height:100vh; color:white;">
+            <h1>404 - Page Not Found</h1>
+        </div>
+    </NotFound>
 </Router>
 
-@* <Router AppAssembly="@typeof(MauiProgram).Assembly">
+@* 
+<Router AppAssembly="@typeof(Routes).Assembly">
     <Found>
-        <MainLayout CurrentTab="@_currentTab">
-            @switch (_currentTab)
-            {
-                case "home":
-                    <Home OnNavigate="@HandleNavigation" />
-                    break;
-                case "courts":
-                    <Courts OnNavigate="@HandleNavigation" />
-                    break;
-                case "book":
-                    <Book OnNavigate="@HandleNavigation" />
-                    break;
-                case "mygames":
-                    <MyGames OnNavigate="@HandleNavigation" />
-                    break;
-                case "passes":
-                    <Passes OnNavigate="@HandleNavigation" />
-                    break;
-                default:
-                    <Home OnNavigate="@HandleNavigation" />
-                    break;
-            }
-        </MainLayout>
+        <MainLayout />
     </Found>
-</Router>
- *@
-@* @code {
-    private string _currentTab = "home";
-    
-    private void HandleNavigation(string tab)
+    <NotFound>
+        <div style="padding:20px; background:#050B14; min-height:100vh; color:white; display:flex; align-items:center; justify-content:center; flex-direction:column;">
+            <h1 style="color:#22D3EE;">404</h1>
+            <p style="color:rgba(255,255,255,0.4);">Page not found</p>
+            <NavLink href="/" style="margin-top:16px; background:#22D3EE; padding:10px 24px; border:none; border-radius:8px; color:#050B14; font-weight:bold; text-decoration:none;">
+                Go Home
+            </NavLink>
+        </div>
+    </NotFound>
+</Router> *@
+
+@code {
+    protected override void OnInitialized()
     {
-        _currentTab = tab;
-        StateHasChanged();
+        NavState.OnChange += StateHasChanged;
+        NavigationManager.LocationChanged += OnLocationChanged;
+
+        UpdateNavStateFromUri(NavigationManager.Uri);
+        base.OnInitialized();
     }
-} *@
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        UpdateNavStateFromUri(e.Location);
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void UpdateNavStateFromUri(string uri)
+    {
+        var baseUri = NavigationManager.BaseUri;
+        var relative = uri.Replace(baseUri, "/");
+        var tab = relative.Trim('/').ToLowerInvariant();
+        if (string.IsNullOrEmpty(tab)) tab = "home";
+
+        switch (tab)
+        {
+            case "":
+            case "/":
+            case "home":
+                NavState.NavigateTo("home");
+                break;
+            case "courts":
+                NavState.NavigateTo("courts");
+                break;
+            case "book":
+                NavState.NavigateTo("book");
+                break;
+            case "mygames":
+                NavState.NavigateTo("mygames");
+                break;
+            case "passes":
+                NavState.NavigateTo("passes");
+                break;
+            default:
+                // leave as-is
+                break;
+        }
+    }
+
+    public void Dispose()
+    {
+        NavState.OnChange -= StateHasChanged;
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}

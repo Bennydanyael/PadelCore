@@ -1,15 +1,13 @@
-/* ===== BOOK SCREEN ===== */
 .book-screen {
     background: #050B14;
     min-height: 100vh;
     width: 100%;
-    padding: 10px 16px 80px 16px;
+    padding: 10px 16px 85px 16px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
 }
 
-/* Section Header */
 .section-header-book {
     display: flex;
     justify-content: space-between;
@@ -17,14 +15,14 @@
     margin-bottom: 12px;
 }
 
-.section-eyebrow-book {
+/*.section-eyebrow-book {
     font-size: 14px;
     font-weight: 700;
     color: #22D3EE;
     text-transform: uppercase;
     letter-spacing: 1px;
     display: block;
-}
+}*/
 
 /* ===== APP BAR ===== */
 .app-bar-book {
