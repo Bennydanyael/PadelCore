@@ -20,7 +20,7 @@ namespace PadelScore.Services
         {
             User = new User
             {
-                Name = "Alex",
+                Name = "Rizal",
                 Pass = new UserPass
                 {
                     Name = "Regular Pass",

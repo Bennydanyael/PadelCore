@@ -1,6 +1,5 @@
 ﻿@page "/book"
 
-@using Models
 @using Utils.Tokens
 @using System.Globalization
 @using System.Text.RegularExpressions
@@ -9,9 +8,9 @@
 @inject PadelScore.Utils.Containers.NavigationState NavState
 
 <div class="book-screen">
-    <ScreenHeader Title="Book a Court">
+        <ScreenHeader Title="Book a Court" >
         <LeftContent>
-            <button class="back-btn" @onclick="NavigateHome" aria-label="Back">
+            <button class="back-btn" @onclick="NavigateBack" aria-label="Back">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
                     <path d="M16 8L8 16L16 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -20,7 +19,6 @@
             </button>
         </LeftContent>
     </ScreenHeader>
-
     <div class="step-indicator">
         <div class="step @(CurrentStep >= 0 ? "active" : "")">
             

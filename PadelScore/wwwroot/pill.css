@@ -39,7 +39,6 @@
         border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-/* Animation for Active pill */
 @keyframes pulse-pill {
     0%, 100% {
         box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.15);

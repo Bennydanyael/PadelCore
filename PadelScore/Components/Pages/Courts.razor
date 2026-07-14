@@ -1,6 +1,5 @@
 ﻿@page "/courts"
 
-@using Models
 @using Utils.Tokens
 @using System.Text.RegularExpressions
 
@@ -8,7 +7,8 @@
 @inject PadelScore.Utils.Containers.NavigationState NavState
 
 <div class="courts-screen">
-    <ScreenHeader Title="Courts">
+    <ScreenHeader Title="Courts" UseIcon="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+    UseIconText="Jakarta & Tangerang">
         <LeftContent>
             <button class="back-btn" @onclick="NavigateBack" aria-label="Back">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,6 @@
             </button>
         </RightContent>
     </ScreenHeader>
-
     <div class="filter-chips">
         @foreach (var filter in Filters)
         {

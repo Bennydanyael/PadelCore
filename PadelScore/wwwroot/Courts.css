@@ -8,50 +8,6 @@
     box-sizing: border-box;
 }
 
-.app-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0 8px 0;
-    position: sticky;
-    top: 20px;
-    background: #050B14;
-    z-index: 10;
-    flex-shrink: 0;
-    width: 100%;
-    border: none;
-}
-
-.app-bar-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0;
-}
-
-.back-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-    .back-btn:hover {
-        color: #FFFFFF;
-        transform: translateX(-2px);
-    }
-
-    .back-btn:active {
-        transform: scale(0.9);
-    }
-
 .title-section {
     display: flex;
     flex-direction: column;
@@ -98,7 +54,6 @@
         transform: scale(0.95);
     }
 
-/* ===== FILTER CHIPS ===== */
 .filter-chips {
     display: flex;
     gap: 8px;
@@ -139,7 +94,6 @@
         box-shadow: 0px 0px 8px rgba(34, 211, 238, 0.5);
     }
 
-/* ===== COURTS LIST ===== */
 .courts-list {
     display: grid;
     grid-template-columns: 1fr;
@@ -149,7 +103,6 @@
     width: 100%;
 }
 
-/* ===== COURT CARD ===== */
 .court-card {
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
@@ -510,14 +463,6 @@
     min-width: 0;
     max-width:auto;
 }
-/*.spec-value {
-    font-size: 12px;
-    font-weight: 700;
-    color: #FFFFFF;
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-}*/
 .spec-value:last-child {
     border-right: none;
     padding-right: 0;
@@ -544,7 +489,6 @@
     }
 }
 
-/* Court Footer */
 .court-footer {
     display: flex;
     justify-content: space-between;
@@ -589,8 +533,6 @@
     font-weight: 500;
     color: rgba(255, 255, 255, 0.3);
 }
-
-/* Book Button */
 .book-btn {
     padding: 8px 20px;
     border-radius: 10px;
@@ -626,9 +568,6 @@
         cursor: not-allowed;
         box-shadow: none;
     }
-
-
-/* Facilities Section */
 .facilities-section {
     margin: 16px 0;
 }
@@ -699,8 +638,6 @@
     color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.2px;
 }
-
-/* Responsive */
 @media (max-width: 360px) {
     .facilities-grid {
         gap: 6px;
@@ -720,9 +657,6 @@
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
-
-/* ===== RESPONSIVE ===== */
-/* Small screens (phone) */
 @media (max-width: 360px) {
     .courts-screen {
         padding: 0 12px 80px 12px;
@@ -763,8 +697,6 @@
         display: block;
     }
 }
-
-/* Medium screens (tablet) */
 @media (min-width: 600px) and (max-width: 1023px) {
     .courts-screen {
         padding: 0 24px 80px 24px;
@@ -833,8 +765,6 @@
         font-size: 24px;
     }
 }
-
-/* Extra large screens */
 @media (min-width: 1440px) {
     .courts-screen {
         max-width: 1200px;

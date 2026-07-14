@@ -20,28 +20,6 @@
         display: none;
     }
 
-.app-bar-passes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0 8px 0;
-    position: sticky;
-    top: 20px;
-    background: #050B14;
-    z-index: 10;
-    flex-shrink: 0;
-    width: 100%;
-    border: none;
-}
-
-.app-bar-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0;
-}
-
 .title-section {
     padding-top: 10px;
     display: flex;
@@ -230,7 +208,7 @@
     flex-direction: column;
 }
 
-.sessions-left {
+.sessions-left-passes {
     color: rgb(163, 230, 53);
     font-weight: 600;
 }

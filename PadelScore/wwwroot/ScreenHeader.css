@@ -1,0 +1,61 @@
+.screen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 30px) !important;
+    padding-right: 16px !important;
+    padding-bottom: 5px !important;
+    padding-left: 16px !important;
+    gap: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.screen-header .left {
+    max-width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.screen-header .right {
+    min-width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-header .center {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.screen-header .title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.screen-header .subtitle {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 420px) {
+    .screen-header {
+        padding: 12px 10px 8px;
+        gap: 8px;
+    }
+    .screen-header .left {
+        min-width: 28px;
+    }
+    .screen-header .right {
+        min-width: 48px;
+    }
+    .screen-header .title {
+        font-size: 16px;
+    }
+}

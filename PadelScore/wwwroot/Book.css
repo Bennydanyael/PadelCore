@@ -14,38 +14,6 @@
     align-items: start;
     margin-bottom: 12px;
 }
-
-/*.section-eyebrow-book {
-    font-size: 14px;
-    font-weight: 700;
-    color: #22D3EE;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: block;
-}*/
-
-/* ===== APP BAR ===== */
-.app-bar-book {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0 8px 0;
-    position: sticky;
-    top: 20px;
-    background: #050B14;
-    z-index: 10;
-    flex-shrink: 0;
-    width: 100%;
-    border: none;
-}
-.app-bar-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0;
-}
-
     .back-btn {
         background: none;
         border: none;
@@ -77,7 +45,6 @@
         gap: 0;
         padding: 16px 0;
         flex-shrink: 0;
-        margin-top: 10px;
     }
 
     .step {
@@ -143,7 +110,6 @@
         color: #22D3EE;
         box-shadow: none;
     }
-    /* ===== SCROLL CONTENT ===== */
     .scroll-content {
         flex: 1;
         overflow-y: auto;
@@ -251,8 +217,8 @@
         font-weight: 700;
         color: #FFFFFF;
         margin: 0;
-        flex: 0 0 auto; /* Ubah dari flex: 1 ke auto */
-        text-align: left; /* Pastikan teks rata kiri */
+        flex: 0 0 auto; 
+        text-align: left;
     }
 
     .court-price-book {
@@ -261,7 +227,6 @@
         color: #22D3EE;
         margin: 2px 0 6px 0;
     }
-    /* ===== DATE STRIP ===== */
     .date-strip {
         display: flex;
         gap: 10px;
@@ -322,7 +287,6 @@
         color: #FFFFFF;
         margin-top: 2px;
     }
-    /* Slot Dot - Indikator ada slot tersedia */
     .slot-dot {
         display: block;
         width: 4px;
@@ -336,7 +300,6 @@
     .date-chip.selected .slot-dot {
         background: #050B14;
     }
-    /* ===== DURATION OPTIONS ===== */
     .duration-options {
         display: table-column;
         gap: 12px;
@@ -367,7 +330,6 @@
             color: #050B14;
             box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
         }
-    /* ===== COURT OPTIONS ===== */
     .court-options {
         display: flex;
         flex-direction: column;
@@ -385,7 +347,6 @@
         cursor: pointer;
         transition: all 0.3s ease;
     }
-
         .court-option:hover {
             background: rgba(255, 255, 255, 0.06);
         }
@@ -447,7 +408,6 @@
         .slot-dot.hidden {
             display: none;
         }
-    /* ===== DURATION OPTIONS ===== */
     .duration-options {
         display: flex;
         gap: 12px;
@@ -465,7 +425,6 @@
         cursor: pointer;
         transition: all 0.3s ease;
     }
-
         .duration-option:hover {
             background: rgba(255, 255, 255, 0.06);
         }
@@ -476,7 +435,6 @@
             color: #050B14;
             box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
         }
-    /* ===== TIME GRID ===== */
     .time-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -526,7 +484,6 @@
         border-radius: 5px;
         width: 30px;
     }
-    /* ===== INVITE PLAYERS ===== */
     .invite-players {
         display: flex;
         align-items: center;
@@ -612,7 +569,6 @@
             width: 20px;
             height: 20px;
         }
-    /* ===== SUMMARY CARD ===== */
     .summary-card {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.06);
@@ -662,7 +618,6 @@
             font-weight: 900;
             color: #22D3EE;
         }
-    /* ===== CONFIRM BUTTON ===== */
     .confirm-btn {
         width: 100%;
         padding: 14px;
@@ -686,7 +641,6 @@
         .confirm-btn:active {
             transform: scale(0.98);
         }
-    /*Pop up overlay*/
     .popup-overlay {
         position: fixed;
         top: 0;
@@ -703,7 +657,6 @@
         animation: fade-in 0.3s ease-out;
         padding: 20px;
     }
-    /* Animasi fade in */
     @keyframes fade-in {
         0% {
             opacity: 0;
@@ -713,7 +666,6 @@
             opacity: 1;
         }
     }
-    /* Popup Content */
     .popup-content {
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.08);
@@ -724,7 +676,6 @@
         text-align: center;
         animation: slide-up 0.4s ease-out;
     }
-    /* Animasi slide up */
     @keyframes slide-up {
         0% {
             transform: translateY(30px) scale(0.95);
@@ -736,7 +687,6 @@
             opacity: 1;
         }
     }
-    /* ===== SUCCESS ICON ===== */
     .success-icon-wrapper {
         display: flex;
         align-items: center;
@@ -766,7 +716,6 @@
             opacity: 1;
         }
     }
-    /* ===== SUCCESS STATE ===== */
     .success-state {
         text-align: center;
         padding: 40px 20px;
@@ -774,7 +723,6 @@
         flex-direction: column;
         align-items: center;
     }
-    /* Checkmark Icon */
     .success-icon-wrapper {
         display: flex;
         align-items: center;
@@ -787,7 +735,6 @@
         height: 80px;
         animation: scale-in 0.5s ease-out;
     }
-    /* Animasi masuk */
     @keyframes scale-in {
         0% {
             transform: scale(0);
@@ -803,7 +750,6 @@
             opacity: 1;
         }
     }
-    /* Animasi pulsa pada icon */
     .success-icon-wrapper {
         animation: pulse-icon 2s ease-in-out infinite;
     }
@@ -824,7 +770,6 @@
         color: #FFFFFF;
         margin: 0 0 16px 0;
     }
-    /* Success Details */
     .success-details {
         width: 100%;
         max-width: 300px;
@@ -845,7 +790,6 @@
         color: rgba(255, 255, 255, 0.4);
         margin: 0;
     }
-    /* Buttons */
     .primary-btn {
         width: 100%;
         max-width: 300px;

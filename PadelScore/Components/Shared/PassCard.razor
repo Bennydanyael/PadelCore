@@ -18,7 +18,7 @@
     }
     
     <div class="pass-card-header">
-        <span class="pass-card-name">@Name</span>
+        <span class="pass-card-name-passes">@Name</span>
         <span class="pass-card-price" style="color:@Color;">@Formatter.FormatCurrency(Price)</span>
     </div>
     
@@ -51,7 +51,7 @@
     [Parameter] public string Validity { get; set; } = string.Empty;
     [Parameter] public string[] Features { get; set; } = Array.Empty<string>();
     [Parameter] public string Color { get; set; } = "#22D3EE";
-    [Parameter] public string BackgroundColor { get; set; } = "rgba(255,255,255,0.03)";
+    [Parameter] public string BackgroundColor { get; set; } = "rgba(255,255,255,0.05)";
     [Parameter] public string ImagePath { get; set; } = string.Empty;
     [Parameter] public bool IsBestValue { get; set; }
     [Parameter] public bool IsSelected { get; set; }
