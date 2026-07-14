@@ -15,22 +15,6 @@
     </NotFound>
 </Router>
 
-@* 
-<Router AppAssembly="@typeof(Routes).Assembly">
-    <Found>
-        <MainLayout />
-    </Found>
-    <NotFound>
-        <div style="padding:20px; background:#050B14; min-height:100vh; color:white; display:flex; align-items:center; justify-content:center; flex-direction:column;">
-            <h1 style="color:#22D3EE;">404</h1>
-            <p style="color:rgba(255,255,255,0.4);">Page not found</p>
-            <NavLink href="/" style="margin-top:16px; background:#22D3EE; padding:10px 24px; border:none; border-radius:8px; color:#050B14; font-weight:bold; text-decoration:none;">
-                Go Home
-            </NavLink>
-        </div>
-    </NotFound>
-</Router> *@
-
 @code {
     protected override void OnInitialized()
     {
@@ -74,7 +58,6 @@
                 NavState.NavigateTo("passes");
                 break;
             default:
-                // leave as-is
                 break;
         }
     }
