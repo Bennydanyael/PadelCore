@@ -53,12 +53,12 @@
         <div class="pass-footer-right">
             @if (IsUsedButton)
             {
-            <span class="sessions-left-passes">@RemainingSessions left</span>
-            }else
-            {
                 <button class="buy-more-btn" @onclick="async () => await OnBuyMore.InvokeAsync(Pass)">
                     Buy More >
                 </button>
+            }else
+            {
+                <span class="sessions-left-passes">@RemainingSessions left</span>
             }
         </div>
     </div>

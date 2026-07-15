@@ -18,6 +18,7 @@ public class Court
     public string ColorBackground { get; set; }
     public string ColorConfirmedGame { get; set; }
     public TimeSpan Time { get; set; }
+    public int RemainingSessions { get; set; }
 }
 
 public class Game
@@ -52,6 +53,7 @@ public class Pass
     public bool IsActive { get; set; }
     public bool IsBestValue { get; set; }
     public string ImagePath { get; set; }
+    public bool UseSessionDot { get; set; }
 }
 
 public class Ranking

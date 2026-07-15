@@ -23,7 +23,11 @@
                          TotalSessions="@Data.User.Pass.TotalSessions"
                          UsedSessions="@Data.User.Pass.UsedSessions"
                          ExpiryDate="@Formatter.FormatDateYear(Data.User.Pass.Expiry)"
-                         IsActive="@Data.User.Pass.IsActive" />
+                         IsActive="@Data.User.Pass.IsActive" 
+                         UseSessionDot = "true"
+                         UseImagePath = "true"
+                         IsUsedIconCalendar = "true"
+                         IsUsedButton = "false"/>
         
         <div class="title-section">
             <span class="section-eyebrow">AVAILABLE PASSES</span>
@@ -44,7 +48,7 @@
                               ImagePath="@pass.ImagePath"
                               IsBestValue="@pass.IsBestValue"
                               IsSelected="@(SelectedPass?.Name == pass.Name)"
-                              OnSelect="() => SelectPass(pass)" />
+                              OnSelect="() => SelectPass(pass)"/>
                 }
             
             </div>

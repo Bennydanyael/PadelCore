@@ -1,0 +1,46 @@
+﻿@using Models
+@using Utils.Tokens
+
+ <div class="court-card-home">
+                    <div class="court-image-wrapper-home">
+                        <img src="Images/Padel.png" alt="Padel Court" class="court-image-home" />
+                </div>
+                <div class="court-info">
+                    <div class="court-name-row">
+                        <span class="court-name">@Court.Name</span>
+                        @if (Court.IsAvailable)
+                        {
+                            <span class="availability-dot-green"></span>
+                        }else
+                        {
+                            <span class="availability-dot-red"></span>
+                        }
+                        </div>
+        
+                    <div class="court-details">
+                        <span class="court-type" style="color: gray">@Court.Type</span>
+                        <span class="court-surface-home">@Court.Surface</span>
+                    </div>
+                    <div class="court-price">@Formatter.FormatCurrency(Court.Price)/hr</div>
+                    <PrimaryButton Disabled="!Court.IsAvailable" OnClick="() => OnBook.InvokeAsync(Court)">
+                        @(Court.IsAvailable ? "Quick Book" : "Full")
+                    </PrimaryButton>
+                </div>
+            </div>
+
+@code{
+    [Parameter] public string Name { get; set; } = string.Empty;
+    [Parameter] public string Type { get; set; } = string.Empty;
+    [Parameter] public string Surface { get; set; } = string.Empty;
+    [Parameter] public string Price { get; set; }
+    [Parameter] public string PerSessionPrice { get; set; }
+    [Parameter] public string Validity { get; set; } = string.Empty;
+    [Parameter] public string[] Features { get; set; } = Array.Empty<string>();
+    [Parameter] public string Color { get; set; } = "#22D3EE";
+    [Parameter] public string BackgroundColor { get; set; } = "rgba(255,255,255,0.05)";
+    [Parameter] public string PathImage { get; set; } = string.Empty;
+    [Parameter] public bool IsAvailable { get; set; }
+    [Parameter] public bool ShowFooter { get; set; } = true;
+    [Parameter] public EventCallback<Court> OnBook { get; set; }
+    [Parameter] public Court Court { get; set; } = default!;
+}

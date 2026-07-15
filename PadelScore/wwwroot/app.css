@@ -723,7 +723,6 @@ h1:focus {
     margin: 2px 0 6px 0;
 }
 
-/* Compact/home variant for CourtCard component (carousel style) */
 .court-card.home-compact {
     min-width: 180px;
     max-width: 200px;
@@ -766,12 +765,6 @@ h1:focus {
 
 .court-card.home-compact .court-body {
     padding: 6px 4px 0 4px;
-}
-
-.court-card.home-compact .court-name-row h3 {
-    font-size: 16px;
-    margin: 0;
-    color: #FFFFFF;
 }
 
 .court-card.home-compact .court-details {

@@ -8,7 +8,11 @@ public static class Formatter
         var culture = new CultureInfo("id-ID");
         return $"Rp {amount.ToString("#,##0", culture)}";
     }
-
+    public static string FormatDateMonth(DateTime date)
+    {
+        var culture = new CultureInfo("id-ID");
+        return date.ToString("dd MMM yyyy", culture);
+    }
     public static string FormatDate(DateTime date)
     {
         var culture = new CultureInfo("id-ID");
