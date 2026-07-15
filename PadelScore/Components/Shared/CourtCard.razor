@@ -1,17 +1,17 @@
 @using PadelScore.Components.Shared
 @using PadelScore.Utils.Tokens
 
-<div class="court-card" style="background:@(Background ?? court.ColorBackground)">
+<div class="court-card" style="background:@(Background ?? Court.ColorBackground)">
 	<div class="court-header">
 		<div class="court-image-wrapper">
-			<img src="@court.PathImage" alt="@court.Name" class="court-image" />
+			<img src="@Court.PathImage" alt="@Court.Name" class="court-image" />
 		</div>
 		<div class="court-title">
 			<div class="court-name-row">
-				<h3>@court.Name</h3>
+				<h3>@Court.Name</h3>
 				@if (ShowAvailability)
 				{
-					@if (court.IsAvailable)
+					@if (Court.IsAvailable)
 					{
 						<span class="availability-dot available"></span>
 					}
@@ -22,8 +22,8 @@
 				}
 			</div>
 			<div class="court-details">
-				<span class="court-type">@court.Type</span>
-				<span class="court-surface">@court.Surface</span>
+				<span class="court-type">@Court.Type</span>
+				<span class="court-surface">@Court.Surface</span>
 			</div>
 		</div>
 	</div>
@@ -33,19 +33,19 @@
 		<div class="court-footer">
 			<div class="price-section">
 				<div class="price-item">
-					<span class="price">@Formatter.FormatCurrency(court.Price)</span>
+					<span class="price">@Formatter.FormatCurrency(Court.Price)</span>
 					<span class="price-period">/hr</span>
 				</div>
 			</div>
-			<PrimaryButton Disabled="!court.IsAvailable" OnClick="() => OnBook.InvokeAsync(court)">
-				@(court.IsAvailable ? (ButtonText ?? "Book Now") : "Fully Booked")
+			<PrimaryButton Disabled="!Court.IsAvailable" OnClick="() => OnBook.InvokeAsync(Court)">
+				@(Court.IsAvailable ? (ButtonText ?? "Book Now") : "Fully Booked")
 			</PrimaryButton>
 		</div>
 	}
 </div>
 
 @code {
-	[Parameter] public Court court { get; set; } = default!;
+	[Parameter] public Court Court { get; set; } = default!;
 	[Parameter] public EventCallback<Court> OnBook { get; set; }
 	[Parameter] public bool ShowFooter { get; set; } = true;
 	[Parameter] public bool ShowAvailability { get; set; } = true;
