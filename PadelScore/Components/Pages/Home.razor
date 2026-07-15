@@ -66,16 +66,6 @@
             @foreach (var court in Data.CourtsHome)
             {
                 <CourtCard Court="court" Compact="true" ButtonText="Quick Book" OnBook="OnBookCallback" />
-                          @*  <HomePassCard 
-                               Name="@court.Name"
-                              Price="@Formatter.FormatCurrency(court.Price)"
-                              Type="@court.Type"
-                              Surface="@court.Surface"
-                              Color="@court.Color"
-                              ImagePath="@court.PathImage"
-                              IsAvailable="@court.IsAvailable"
-                              OnBook="OnBookCallback"
-                              Court="@court" /> *@
             }
         </div>
 

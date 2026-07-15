@@ -2,11 +2,12 @@
 @using PadelScore.Utils.Tokens
 
 <div class="court-card @(Compact ? "home-compact" : "")" style="background:@(Background ?? Court.ColorBackground)">
-	<div class="court-header">
-		<div class="court-image-wrapper">
+	@if (Compact)
+	{
+		<div class="court-image-wrapper home-top-image">
 			<img src="@Court.PathImage" alt="@Court.Name" class="court-image" />
 		</div>
-		<div class="court-title">
+		<div class="court-body">
 			<div class="court-name-row">
 				<h3>@Court.Name</h3>
 				@if (ShowAvailability)
@@ -26,7 +27,35 @@
 				<span class="court-surface">@Court.Surface</span>
 			</div>
 		</div>
-	</div>
+	}
+	else
+	{
+		<div class="court-header">
+			<div class="court-image-wrapper">
+				<img src="@Court.PathImage" alt="@Court.Name" class="court-image" />
+			</div>
+			<div class="court-title">
+				<div class="court-name-row">
+					<h3>@Court.Name</h3>
+					@if (ShowAvailability)
+					{
+						@if (Court.IsAvailable)
+						{
+							<span class="availability-dot available"></span>
+						}
+						else
+						{
+							<span class="availability-dot unavailable"></span>
+						}
+					}
+				</div>
+				<div class="court-details">
+					<span class="court-type">@Court.Type</span>
+					<span class="court-surface">@Court.Surface</span>
+				</div>
+			</div>
+		</div>
+	}
 
 	@if (ShowFooter)
 	{
