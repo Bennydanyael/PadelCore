@@ -1,7 +1,7 @@
 @using PadelScore.Components.Shared
 @using PadelScore.Utils.Tokens
 
-<div class="court-card" style="background:@(Background ?? Court.ColorBackground)">
+<div class="court-card @(Compact ? "home-compact" : "")" style="background:@(Background ?? Court.ColorBackground)">
 	<div class="court-header">
 		<div class="court-image-wrapper">
 			<img src="@Court.PathImage" alt="@Court.Name" class="court-image" />
@@ -49,6 +49,7 @@
 	[Parameter] public EventCallback<Court> OnBook { get; set; }
 	[Parameter] public bool ShowFooter { get; set; } = true;
 	[Parameter] public bool ShowAvailability { get; set; } = true;
+	[Parameter] public bool Compact { get; set; } = false;
 	[Parameter] public string? ButtonText { get; set; }
 	[Parameter] public string? Background { get; set; }
 }
