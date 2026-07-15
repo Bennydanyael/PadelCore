@@ -39,12 +39,18 @@
     </div>
 
     <div class="scroll-content">
-        <CurrentPassCard PassName="Regular Pass"
+        <CurrentPassCard PassName = "Regular Pass"
                          TotalSessions="@Data.User.Pass.TotalSessions"
                          UsedSessions="@Data.User.Pass.UsedSessions"
-                         ExpiryDate="@Formatter.FormatDateYear(Data.User.Pass.Expiry)"
+                         ExpiryDate="@Formatter.FormatDateMonth(Data.User.Pass.Expiry)"
                          IsActive="@Data.User.Pass.IsActive"
-                         ImagePath="Images/CourtsA.png" />
+                         ImagePath="Images/CourtsA.png" 
+                         UseSessionDot = "false"
+                         UseImagePath = "false"
+                         IsUsedIconCalendar = "false"
+                         IsUsedButton = "true"
+                         OnBuyMore="OnBuyMoreCallback"
+                         Pass="@Data.User.Pass"/>
 
         <div class="section-header">
             <div>
@@ -60,6 +66,16 @@
             @foreach (var court in Data.CourtsHome)
             {
                 <CourtCard Court="court" Compact="true" ButtonText="Quick Book" OnBook="OnBookCallback" />
+                          @*  <HomePassCard 
+                               Name="@court.Name"
+                              Price="@Formatter.FormatCurrency(court.Price)"
+                              Type="@court.Type"
+                              Surface="@court.Surface"
+                              Color="@court.Color"
+                              ImagePath="@court.PathImage"
+                              IsAvailable="@court.IsAvailable"
+                              OnBook="OnBookCallback"
+                              Court="@court" /> *@
             }
         </div>
 
@@ -197,6 +213,6 @@
         return new List<string> { "Rizal", "Budi", "Andi", "Sinta" };
     }
 
-    // Callback wrapper for CourtCard OnBook to avoid inline complex attribute expressions
     private EventCallback<Court> OnBookCallback => EventCallback.Factory.Create<Court>(this, (c) => NavigateToBook());
+    private EventCallback<UserPass> OnBuyMoreCallback => EventCallback.Factory.Create<UserPass>(this, (c) => NavigateToPasses());
 }
