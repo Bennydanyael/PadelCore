@@ -97,19 +97,6 @@
         .step-line.active {
             background: #22D3EE;
         }
-
-    .step:last-child .step-number {
-        background: transparent;
-        border-color: rgba(255, 255, 255, 0.06);
-        color: rgba(255, 255, 255, 0.3);
-    }
-
-    .step:last-child.active .step-number {
-        background: transparent;
-        border-color: #22D3EE;
-        color: #22D3EE;
-        box-shadow: none;
-    }
     .scroll-content {
         flex: 1;
         overflow-y: auto;
@@ -134,26 +121,44 @@
             display: none;
         }
 
-    .court-card-book {
-        min-width: 140px;
-        max-width: 140px;
-        max-height: 350px;
-        flex: 0 0 auto;
-        background: rgba(34, 211, 238, 0.06);
-        border: 1px solid #22D3EE;
-        border-radius: 16px;
-        overflow: hidden;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+.court-card-book {
+    min-width: 140px;
+    max-width: 160px;
+    flex: 0 0 auto;
+    background: rgba(34, 211, 238, 0.06);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+}
 
         .court-card-book:hover {
             border-color: rgba(34, 211, 238, 0.2);
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .court-card-book.selected {
+            border-color: transparent !important;
+            background: rgba(34, 211, 238, 0.04);
+            box-shadow: 0 0 30px rgba(34, 211, 238, 0.05);
+        }
+        .court-card-book.selected::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            border-radius: 16px;
+            border: 2px solid #22D3EE;
+            pointer-events: none;
+            z-index: 1;
         }
 
     .court-image-wrapper-book {
@@ -393,6 +398,22 @@
         font-weight: 700;
     }
 
+.check-mark-step {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #22D3EE;
+    color: #050B14;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    z-index: 2;
+}
 
     .slot-dot {
         display: block;

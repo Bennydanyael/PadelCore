@@ -1,6 +1,5 @@
 ﻿@page "/mygames"
 
-@using Models
 @using Utils.Tokens
 @using System.Text.RegularExpressions
 
@@ -50,76 +49,73 @@
             </button>
         }
     </div>
-
                 @if (SelectedTab == "upcoming")
                 {
                   @foreach (var court in FilteredCourts.Where(c => new int[] { 1, 3 }.Contains(c.Id)))
-        {
-            <div class="court-card-game" style="background:@court.ColorBackground">
-                <div class="court-header-game">
-                    <div class="court-image-wrapper-game">
-                        <img src="@court.PathImage" alt="Padel Court" class="court-image" />
-                   </div>
-                <div class="court-title-game">
-                    <div class="court-name-row-game">
-                        <h2>@court.Name</h2>
-                            @{
-                                    if (!string.IsNullOrEmpty(court.ColorConfirmedGame))
-                                    {
-                                        _color = Regex.Replace(court.ColorConfirmedGame, @"0\.\d+", "1");
-                                    }
-                            }
-                        <span class="court-type-confirmed" 
-                                      style="color: @_color border: @court.ColorConfirmedGame background: rgba(34, 197, 94, 0.5);">Confirmed</span>
-                    </div>
-                </div>
-            </div>
-                <div class="game-schedule">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" 
-                              stroke="#22D3EE" 
-                              stroke-width="1.5" 
-                              stroke-linecap="round"/>
-                    </svg>
-                    <span class="game-date-upcoming">Tomorrow</span>
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="9" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 6V12" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M16.24 16.24L12 12" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span class="game-time-upcoming">@Formatter.FormatTime(court.Time) – @Formatter.FormatTime(court.Time.Add(TimeSpan.FromMinutes(90)))</span>
-                <span class="countdown-label">Starts in</span>
-                    <span class="game-time-label">1h 9m 22s</span>
-                </div>
-                <div class="game-players-mygame">
-                    <div class="player-teams-mygame">
-                        <div class="team-mygame team-left-mygame">
-                            <div class="player-avatars">
-                                <div class="avatar-mygame avatar-1">R</div>
-                                <div class="avatar-mygame avatar-2">B</div>
-                                <div class="avatar-mygame avatar-3">A</div>
-                            </div>
-                            <div class="team-names-mygame">
-                                <div class="team-names-wrapper">
-                                    <span class="team-name-up-mygame">Budi & Andi</span>
-                                    <span class="team-name-bottom-mygame">@Formatter.FormatCurrency(court.Price * 1.35m)</span>
-                                </div> 
-                                <div class="team-actions">
-                                    <button class="reschedule-btn">Reschedule</button>
-                                    <button class="cancel-btn">Cancel</button>
+                    {
+                        <div class="court-card-game" style="background:@court.ColorBackground">
+                            <div class="court-header-game">
+                                <div class="court-image-wrapper-game">
+                                    <img src="@court.PathImage" alt="Padel Court" class="court-image" />
+                               </div>
+                            <div class="court-title-game">
+                                <div class="court-name-row-game">
+                                    <h2>@court.Name</h2>
+                                        @if (!string.IsNullOrEmpty(court.ColorConfirmedGame))
+                                        {
+                                            _color = Regex.Replace(court.ColorConfirmedGame, @"0\.\d+", "1");
+                                        }
+                                    <span class="court-type-confirmed" style="color: @_color border: @court.ColorConfirmedGame background: rgba(34, 197, 94, 0.5);">Confirmed</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        }    
-                
+                            <div class="game-schedule">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" 
+                                          stroke="#22D3EE" 
+                                          stroke-width="1.5" 
+                                          stroke-linecap="round"/>
+                                </svg>
+                                <span class="game-date-upcoming">Tomorrow</span>
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 6V12" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M16.24 16.24L12 12" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="game-time-upcoming">@Formatter.FormatTime(court.Time) – @Formatter.FormatTime(court.Time.Add(TimeSpan.FromMinutes(90)))</span>
+                            <span class="countdown-label">Starts in</span>
+                                <span class="game-time-label">1h 9m 22s</span>
+                            </div>
+                            <div class="game-players-mygame">
+                                <div class="player-teams-mygame">
+                                    <div class="team-mygame team-left-mygame">
+                                        <div class="player-avatars">
+                                            <div class="avatar-mygame avatar-1">R</div>
+                                            <div class="avatar-mygame avatar-2">B</div>
+                                            <div class="avatar-mygame avatar-3">A</div>
+                                        </div>
+                                        <div class="team-names-mygame">
+                                            <div class="team-names-wrapper">
+                                                <span class="team-name-up-mygame">Budi & Andi</span>
+                                                <span class="team-name-bottom-mygame">@Formatter.FormatCurrency(court.Price * 1.35m)</span>
+                                            </div> 
+                                            <div class="team-actions">
+                                                <button class="reschedule-btn">Reschedule</button>
+                                                <button class="cancel-btn">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }    
                 }
                 else if (SelectedTab == "past")
                 {
             @foreach (var _game in FilteredGames)
         {
+            var currentGame = _game;
+            var currentRating = GetRating(currentGame);
                 <div class="game-card @(_game.Result == "WIN" ? "win" : "loss")">
                 <div class="game-header">
                     <div class="court-image-wrapper-game">
@@ -133,38 +129,37 @@
                             @_game.Result
                     </span>
                 </div>
-
                 <div class="game-opponent">
                     <span class="opponent-label">vs</span>
                         <span class="opponent-name">@_game.Opponent</span>
                 </div>
-
                 <div class="game-score">
-    <span class="score">@_game.Score</span>
-    
-    @if (_game.Rating != null)
-    {
-        <div class="stars">
-            @for (int i = 0; i < 5; i++)
-            {
-                <span class="star @(i < _game.Rating ? "filled" : "")">⭐</span>
-            }
-        </div>
-    }
-    else
-    {
-        <button class="rate-btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z" 
-                      stroke="#F59E0B" 
-                      stroke-width="1.5" 
-                      stroke-linecap="round" 
-                      stroke-linejoin="round"/>
-            </svg>
-            Rate Game
-        </button>
-    }
-</div>
+                    <span class="score">@_game.Score</span>
+                    @if (_game.Rating != null)
+                    {
+                        <div class="stars">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                var rating = i;
+                                <span class="star @(i <= currentRating ? "filled" : "")"
+                                      @onclick="() => SetRating(currentGame, rating)">⭐</span>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <button class="rate-btn" @onclick="() => ShowRatingModal(currentGame)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.2691 4.41115C11.5006 3.89177 11.6164 3.63208 11.7776 3.55211C11.9176 3.48263 12.082 3.48263 12.222 3.55211C12.3832 3.63208 12.499 3.89177 12.7305 4.41115L14.5745 8.54808C14.643 8.70162 14.6772 8.77839 14.7302 8.83718C14.777 8.8892 14.8343 8.93081 14.8982 8.95929C14.9705 8.99149 15.0541 9.00031 15.2213 9.01795L19.7256 9.49336C20.2911 9.55304 20.5738 9.58288 20.6997 9.71147C20.809 9.82316 20.8598 9.97956 20.837 10.1342C20.8108 10.3122 20.5996 10.5025 20.1772 10.8832L16.8125 13.9154C16.6877 14.0279 16.6252 14.0842 16.5857 14.1527C16.5507 14.2134 16.5288 14.2807 16.5215 14.3503C16.5132 14.429 16.5306 14.5112 16.5655 14.6757L17.5053 19.1064C17.6233 19.6627 17.6823 19.9408 17.5989 20.1002C17.5264 20.2388 17.3934 20.3354 17.2393 20.3615C17.0619 20.3915 16.8156 20.2495 16.323 19.9654L12.3995 17.7024C12.2539 17.6184 12.1811 17.5765 12.1037 17.56C12.0352 17.5455 11.9644 17.5455 11.8959 17.56C11.8185 17.5765 11.7457 17.6184 11.6001 17.7024L7.67662 19.9654C7.18404 20.2495 6.93775 20.3915 6.76034 20.3615C6.60623 20.3354 6.47319 20.2388 6.40075 20.1002C6.31736 19.9408 6.37635 19.6627 6.49434 19.1064L7.4341 14.6757C7.46898 14.5112 7.48642 14.429 7.47814 14.3503C7.47081 14.2807 7.44894 14.2134 7.41394 14.1527C7.37439 14.0842 7.31195 14.0279 7.18708 13.9154L3.82246 10.8832C3.40005 10.5025 3.18884 10.3122 3.16258 10.1342C3.13978 9.97956 3.19059 9.82316 3.29993 9.71147C3.42581 9.58288 3.70856 9.55304 4.27406 9.49336L8.77835 9.01795C8.94553 9.00031 9.02911 8.99149 9.10139 8.95929C9.16534 8.93081 9.2226 8.8892 9.26946 8.83718C9.32241 8.77839 9.35663 8.70162 9.42508 8.54808L11.2691 4.41115Z" 
+                                      stroke="#F59E0B" 
+                                      stroke-width="1.5" 
+                                      stroke-linecap="round" 
+                                      stroke-linejoin="round"/>
+                            </svg>
+                            Rate Game
+                        </button>
+                    }
+                    </div>
             </div>
                 }
         }
@@ -178,10 +173,58 @@
             </div>
         }
 
-    </div>
+    @if (ShowRatingPopup)
+    {
+        <div class="rating-popup-overlay">
+            <div class="rating-popup-content" @onclick="stopPropagation" @onclick:stopPropagation="true">
+                <button class="rating-popup-close" @onclick="CloseRatingPopup">✕</button>
+                
+                <h3 class="rating-popup-title">Rate Your Game</h3>
+                <p class="rating-popup-subtitle">How was your game?</p>
+                
+                <div class="rating-popup-stars">
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        var rating = i;
+                        <span class="rating-popup-star @(i <= SelectedRating ? "filled" : "")" 
+                              @onclick="() => SetPopupRating(rating)"
+                              @onmouseenter="() => HoverRating = rating"
+                              @onmouseleave="() => HoverRating = 0">
+                            ⭐
+                        </span>
+                    }
+                </div>
+                
+                <div class="rating-popup-text">
+                    @if (SelectedRating > 0)
+                    {
+                        <span>@GetRatingText(SelectedRating)</span>
+                    }
+                    else
+                    {
+                        <span>Tap a star to rate</span>
+                    }
+                </div>
+                
+                <div class="rating-popup-actions">
+                    <button class="rating-popup-submit @(SelectedRating > 0 ? "active" : "disabled")" 
+                            @onclick="SubmitRating"
+                            disabled="@(SelectedRating <= 0)">
+                        Submit Rating
+                    </button>
+                    <button class="rating-popup-skip" @onclick="SkipRating">
+                        Skip
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
 
 @code {
     [Parameter] public EventCallback<string> OnNavigate { get; set; }
+    [Parameter] public EventCallback<int?> RatingChanged { get; set; }
     private string SelectedTab = "upcoming";
     private List<Game> FilteredGames => SelectedTab switch
     {
@@ -190,19 +233,42 @@
         "cancelled" => Data.Games.Where(g => g.Status == "Cancelled").ToList(),
         _ => Data.Games
     };
+    private Dictionary<int, int?> _tempRatings = new();
+    private bool ShowRatingPopup = false;
+    private int SelectedRating = 0;
+    private int HoverRating = 0;
+    private Game? CurrentGame;
     private string _color = "";
     private string SelectedFilter = "all";
     private List<Court> FilteredCourts => SelectedFilter == "all" 
         ? Data.CourtsPage
         : Data.CourtsPage.Where(c => c.Categories.Contains(SelectedFilter)).ToList();
-    
     private List<(string Key, string Label)> Tabs = new()
     {
         ("upcoming", "Upcoming"),
         ("past", "Past"),
         ("cancelled", "Cancelled")
     };
-    
+    private int? GetRating(Game game)
+    {
+        if (_tempRatings.ContainsKey(game.Id))
+            return _tempRatings[game.Id];
+        return game.Rating;
+    }
+    private async Task SetRating(Game game, int rating)
+    {
+        if (!_tempRatings.ContainsKey(game.Id))
+            _tempRatings[game.Id] = game.Rating;
+
+        if (_tempRatings[game.Id] == rating)
+            _tempRatings[game.Id] = null;
+        else _tempRatings[game.Id] = rating;
+
+        game.Rating = _tempRatings[game.Id];
+        await RatingChanged.InvokeAsync(game.Rating);
+        StateHasChanged();
+    }
+
     private string GetGameStatus(Game game)
     {
         return game.Status switch
@@ -212,6 +278,59 @@
             "Cancelled" => "Cancelled",
             _ => "Active"
         };
+    }
+    private void ShowRatingModal(Game game)
+    {
+        CurrentGame = game;
+        ShowRatingPopup = true;
+        SelectedRating = game.Rating ?? 0;
+        StateHasChanged();
+    }
+
+    private void CloseRatingPopup()
+    {
+        ShowRatingPopup = false;
+        SelectedRating = 0;
+        HoverRating = 0;
+        StateHasChanged();
+    }
+
+    private void SetPopupRating(int rating)
+    {
+        SelectedRating = rating;
+        StateHasChanged();
+    }
+
+    private void SubmitRating()
+    {
+        if (SelectedRating > 0 && CurrentGame != null)
+        {
+            CurrentGame.Rating = SelectedRating;
+            _tempRatings[CurrentGame.Id] = SelectedRating;
+            CloseRatingPopup();
+            StateHasChanged();
+        }
+    }
+
+    private void SkipRating()
+    {
+        CloseRatingPopup();
+    }
+
+    private string GetRatingText(int rating)
+    {
+        return rating switch
+        {
+            1 => "Poor 😞",
+            2 => "Fair 😐",
+            3 => "Good 🙂",
+            4 => "Great 😊",
+            5 => "Excellent 🤩",
+            _ => ""
+        };
+    }
+    private void stopPropagation(MouseEventArgs e)
+    {
     }
     
     private async Task NavigateHome()

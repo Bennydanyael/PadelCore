@@ -213,6 +213,31 @@
 
         <div class="bottom-spacer"></div>
     </div>
+
+        @if (IsPassActivated && SelectedPass != null)
+        {
+            <div class="popup-overlay">
+                <div class="popup-content">
+                    <div class="success-icon-wrapper">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" stroke-width="2" />
+                            <path d="M7 13L10 16L17 9" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="success-title">Pass Activated!</h3>
+                    <div class="success-details">
+                        <p class="success-court">@SelectedPass.Name Pass</p>
+                        <p class="success-info">
+                            @SelectedPass.TotalSessions sessions · @SelectedPass.Validity
+                        </p>
+                        <p class="success-price">@Formatter.FormatCurrency(SelectedPass.Price)</p>
+                    </div>
+                    <button class="primary-btn" @onclick="NavigateHome">
+                        Go to Home
+                    </button>
+                </div>
+            </div>
+        }
 </div>
 
 @code {
@@ -221,13 +246,8 @@
     private User User => Data.User;
     private Pass? SelectedPass;
     private bool CanBuyPass => SelectedPass != null;
-    private void BuyPass()
-    {
-        if (SelectedPass != null)
-        {
-            Console.WriteLine($"Buying {SelectedPass.Name} pass");
-        }
-    }
+    private bool IsPassActivated = false;
+    private bool IsProcessing = false; 
     private async Task NavigateHome()
     {
         NavState.NavigateTo("home");
@@ -264,5 +284,37 @@
     {
         SelectedPass = SelectedPass?.Name == pass.Name ? null : pass;
         StateHasChanged();
+    }
+    private string GetRgbValues(string hexColor)
+    {
+        if (string.IsNullOrEmpty(hexColor)) return "34, 211, 238";
+
+        if (hexColor.StartsWith("#"))
+        {
+            var color = System.Drawing.ColorTranslator.FromHtml(hexColor);
+            return $"{color.R}, {color.G}, {color.B}";
+        }
+        return "34, 211, 238";
+    }
+
+    private async Task BuyPass()
+    {
+        if (SelectedPass != null)
+        {
+            IsProcessing = true;
+            await Task.Delay(1000);
+
+            IsPassActivated = true;
+            IsProcessing = false;
+            StateHasChanged();
+            Data.User.Pass = new UserPass
+            {
+                Name = SelectedPass.Name,
+                TotalSessions = SelectedPass.TotalSessions,
+                UsedSessions = 0,
+                Expiry = DateTime.Now.AddMonths(SelectedPass.Validity.Contains("3") ? 3 : 6),
+                IsActive = true
+            };
+        }
     }
 }

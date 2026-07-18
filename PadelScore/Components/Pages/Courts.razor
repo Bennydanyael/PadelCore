@@ -34,6 +34,7 @@
             </button>
         </RightContent>
     </ScreenHeader>
+
     <div class="filter-chips">
         @foreach (var filter in Filters)
         {
@@ -103,7 +104,7 @@
                             <span class="price-period">/hr</span>
                         </div>
                         <div class="price-item-discount">
-                            <span class="price-discount">@Formatter.FormatCurrency(court.Price  * 1.35m)</span>
+                            <span class="price-discount">@Formatter.FormatCurrency((court.Price / 60)  * 90)</span>
                             <span class="price-period">/ 90 min</span>
                         </div>
                     </div>

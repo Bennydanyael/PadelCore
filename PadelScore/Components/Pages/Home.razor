@@ -44,7 +44,7 @@
                          UsedSessions="@Data.User.Pass.UsedSessions"
                          ExpiryDate="@Formatter.FormatDateMonth(Data.User.Pass.Expiry)"
                          IsActive="@Data.User.Pass.IsActive"
-                         ImagePath="Images/CourtsA.png" 
+                         ImagePath="@Data.CourtsPage.FirstOrDefault()?.PathImage"
                          UseSessionDot = "false"
                          UseImagePath = "false"
                          IsUsedIconCalendar = "false"

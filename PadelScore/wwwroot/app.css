@@ -455,7 +455,7 @@ h1:focus {
     min-width: 0;
 }
     .progress-bar-fill::after {
-        content: '';
+        content: '8';
         position: absolute;
         top: 0;
         left: -100%;

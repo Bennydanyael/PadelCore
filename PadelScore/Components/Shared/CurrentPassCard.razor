@@ -23,7 +23,7 @@
             <span>@UsedSessions / @TotalSessions</span>
         </div>
         <div class="progress-bar">
-            <div class="progress-fill" style="width: 0%"></div>
+            <div class="progress-fill" style="width: @(ProgressPercentage)%"></div>
         </div>
         @if (UseSessionDot)
         {
@@ -66,17 +66,17 @@
 
 @code {
     [Parameter] public UserPass Pass { get; set; } = default!;
-    [Parameter] public string PassName { get; set; } = "Regular Pass";
-    [Parameter] public int TotalSessions { get; set; } = 10;
-    [Parameter] public int UsedSessions { get; set; } = 2;
+    [Parameter] public string PassName { get; set; }
+    [Parameter] public int TotalSessions { get; set; }
+    [Parameter] public int UsedSessions { get; set; }
     [Parameter] public string ExpiryDate { get; set; } = string.Empty;
-    [Parameter] public bool IsActive { get; set; } = true;
-    [Parameter] public string ImagePath { get; set; } = "Images/CourtsA.png";
+    [Parameter] public bool IsActive { get; set; }
+    [Parameter] public string ImagePath { get; set; }
     [Parameter] public EventCallback<UserPass> OnBuyMore { get; set; }
-    [Parameter] public bool UseSessionDot { get; set; } = false;
-    [Parameter] public bool UseImagePath { get; set; } = false;
-    [Parameter] public bool IsUsedIconCalendar { get; set; } = false;
-    [Parameter] public bool IsUsedButton { get; set; } = false;
+    [Parameter] public bool UseSessionDot { get; set; }
+    [Parameter] public bool UseImagePath { get; set; }
+    [Parameter] public bool IsUsedIconCalendar { get; set; }
+    [Parameter] public bool IsUsedButton { get; set; }
     private double ProgressPercentage => TotalSessions > 0 ? (double)UsedSessions / TotalSessions * 100 : 0;
     private int RemainingSessions => TotalSessions - UsedSessions;
 }

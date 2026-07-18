@@ -8,7 +8,7 @@
 @inject PadelScore.Utils.Containers.NavigationState NavState
 
 <div class="book-screen">
-        <ScreenHeader Title="Book a Court" >
+    <ScreenHeader Title="Book a Court">
         <LeftContent>
             <button class="back-btn" @onclick="NavigateBack" aria-label="Back">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,105 +19,135 @@
             </button>
         </LeftContent>
     </ScreenHeader>
-    <div class="step-indicator">
-        <div class="step @(CurrentStep >= 0 ? "active" : "")">
-            
-            <span class="step-number">
-                <svg viewBox="0 0 512 512" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
-                    .st0 {
-                    fill: #22D3EE;
-                    }
 
-                    .st1 {
-                    fill: #111212;
-                    }
-                </style> <g> <path class="st0" d="M256,470c-118,0-214-96-214-214S138,42,256,42s214,96,214,214S374,470,256,470z M256,66 C151.2,66,66,151.2,66,256s85.2,190,190,190s190-85.2,190-190S360.8,66,256,66z"></path> </g> <g> 
-                    <path class="st1" d="M231.5,331.5c-6,0-11.8-2.5-15.9-6.8l-55.3-57.9c-4.6-4.8-4.4-12.4,0.4-17c4.8-4.6,12.4-4.4,17,0.4l53.8,56.3 l102.4-121.8c4.3-5.1,11.8-5.7,16.9-1.5c5.1,4.3,5.7,11.8,1.5,16.9L248.4,323.7c-4,4.8-9.9,7.6-16.1,7.8 C232,331.5,231.8,331.5,231.5,331.5z"></path> </g> </g></svg>
+    <div class="step-indicator">
+        <div class="step @(CurrentStep >= 1 ? "active" : "")">
+            <span class="step-number">
+                @if (CurrentStep >= 1)
+                {
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#050B14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                }
+                else
+                {
+                    <span>1</span>
+                }
             </span>
             <span class="step-label">Court</span>
         </div>
-        <div class="step @(CurrentStep >= 1 ? "active" : "")">
+        <div class="step-line @(CurrentStep >= 2 ? "active" : "")"></div>
+        
+        <div class="step @(CurrentStep >= 2 ? "active" : "")">
             <span class="step-number">
-                <svg viewBox="0 0 512 512" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">
-                    .st0 {
-                    fill: #22D3EE;
-                    }
-
-                    .st1 {
-                    fill: #111212;
-                    }
-                </style> <g> <path class="st0" d="M256,470c-118,0-214-96-214-214S138,42,256,42s214,96,214,214S374,470,256,470z M256,66 C151.2,66,66,151.2,66,256s85.2,190,190,190s190-85.2,190-190S360.8,66,256,66z"></path> </g> <g> <path class="st1" d="M231.5,331.5c-6,0-11.8-2.5-15.9-6.8l-55.3-57.9c-4.6-4.8-4.4-12.4,0.4-17c4.8-4.6,12.4-4.4,17,0.4l53.8,56.3 l102.4-121.8c4.3-5.1,11.8-5.7,16.9-1.5c5.1,4.3,5.7,11.8,1.5,16.9L248.4,323.7c-4,4.8-9.9,7.6-16.1,7.8 C232,331.5,231.8,331.5,231.5,331.5z"></path> </g> </g></svg>
-</span>
+                @if (CurrentStep >= 2)
+                {
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#050B14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                }
+                else
+                {
+                    <span>2</span>
+                }
+            </span>
             <span class="step-label">Time</span>
         </div>
-        <div class="step @(CurrentStep >= 2 ? "active" : "")">
-            <span class="step-number">3</span>
+        <div class="step-line @(CurrentStep >= 3 ? "active" : "")"></div>
+        
+        <div class="step @(CurrentStep >= 3 ? "active" : "")">
+            <span class="step-number">
+                @if (CurrentStep >= 3)
+                {
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#050B14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                }
+                else
+                {
+                    <span>3</span>
+                }
+            </span>
             <span class="step-label">Confirm</span>
         </div>
     </div>
-    
-    <div class="section-header">
-        <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">SELECT COURT</span>
-        </div>
-        </div>
-    <div class="courts-carousel-book">
-        @foreach (var court in Data.CourtsHome.Where(c => c.IsAvailable && new int[] { 1, 2, 3 }.Contains(c.Id)))
-        {
-            _color = Regex.Replace(court.Color, @"0\.\d+", "0.2");
-            <div class="court-card-book" style="background:@_color;border: 2px solid @court.Color">
-                 <div class="court-image-wrapper-book">
-                    <img src="@court.PathImage" alt="Padel Court" class="court-image-book" />
-                </div> 
-                <div class="court-info-book">
-                    <span class="court-name-book">@court.Name</span>
-                    <span class="court-type" style="color: gray">@court.Type</span>
-                    <div class="court-price-book">@Formatter.FormatCurrency(court.Price)/hr</div>
-                </div>
-            </div>
-        }
-    </div>
+
     <div class="step-content">
-        <div class="section-header">
-            <span class="section-eyebrow-book" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">SELECT DATE</span>
+        <div class="section-header-book">
+            <span class="section-eyebrow" style="color: #22D3EE; text-transform: uppercase; letter-spacing: 1px; display: block;">SELECT COURT</span>
+        </div>
+        <div class="courts-carousel-book">
+            @foreach (var court in Data.CourtsHome.Where(c => c.IsAvailable))
+            {
+                _color = Regex.Replace(court.Color, @"0\.\d+", "0.2");
+                <div class="court-card-book @(SelectedCourt?.Id == court.Id ? "selected" : "")" 
+                     style="background:@_color; border: 2px solid @(SelectedCourt?.Id == court.Id ? court.Color : "transparent")"
+                     @onclick="() => SelectCourt(court)">
+                    <div class="court-image-wrapper-book">
+                        <img src="@court.PathImage" alt="Padel Court" class="court-image-book" />
+                    </div>
+                    <div class="court-info-book">
+                        <span class="court-name-book">@court.Name</span>
+                        <span class="court-type" style="color: gray">@court.Type</span>
+                        <div class="court-price-book">@Formatter.FormatCurrency(court.Price)/hr</div>
+                    </div>
+                    @if (SelectedCourt?.Id == court.Id)
+                    {
+                        <span class="check-mark-step">✓</span>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="step-content" style="@(CurrentStep >= 1 ? "" : "opacity: 0.4; pointer-events: none;")">
+        <div class="section-header-book" style="margin-top: 20px;">
+            <span class="section-eyebrow" style="color: #22D3EE; text-transform: uppercase; letter-spacing: 1px; display: block;">
+                SELECT DATE</span>
         </div>
         <div class="date-strip">
             @foreach (var item in GetWeekDays())
             {
                 <div class="date-chip @(SelectedDate == item._date ? "selected" : "")"
-                     @onclick="() => SelectedDate = item._date">
+                     @onclick="() => SelectDate(item._date)">
                     <span class="date-day">@item._dayName</span>
                     <span class="date-number">@item._date.Day</span>
-                    @if (HasAvailableSlots(item._date) && item._date != new DateTime(DateTime.Today.Year, 6, 10))
+                    @if (HasAvailableSlots(item._date))
                     {
                         <span class="slot-dot"></span>
                     }
                 </div>
             }
         </div>
-
+    </div>
+    <div class="step-content" style="@(CurrentStep >= 2 ? "" : "opacity: 0.4; pointer-events: none;")">
         <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">DURATION</span>
+            <span class="section-eyebrow" style="color: #22D3EE; text-transform: uppercase; letter-spacing: 1px; display: block;">DURATION</span>
         </div>
         <div class="duration-options">
             <button class="duration-option @(SelectedDuration == 60 ? "selected" : "")"
-                    @onclick="() => SelectedDuration = 60">
+                    @onclick="() => { SelectDuration(60); }">
                 60 min
             </button>
             <button class="duration-option @(SelectedDuration == 90 ? "selected" : "")"
-                    @onclick="() => SelectedDuration = 90">
+                    @onclick="() => { SelectDuration(90); }">
                 90 min
             </button>
+            <button class="duration-option @(SelectedDuration == 120 ? "selected" : "")"
+                    @onclick="() => { SelectDuration(120); }">
+                120 min
+            </button>
         </div>
-
+    </div>
+    <div class="step-content" style="@(CurrentStep >= 3 ? "" : "opacity: 0.4; pointer-events: none;")">
         <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">PICK A TIME</span>
+            <span class="section-eyebrow" style="color: #22D3EE; text-transform: uppercase; letter-spacing: 1px; display: block;">PICK A TIME</span>
         </div>
         <div class="time-grid">
             @foreach (var slot in GetTimeSlots())
             {
                 <button class="time-slot @(slot.IsFull ? "full" : "") @(slot.IsSelected ? "selected" : "")"
-                        disabled="@slot.IsFull" style="background: @(slot.Time == new TimeSpan(19, 0, 0) ? "#22D3EE;" : "") color:@(slot.Time == new TimeSpan(19, 0, 0) ? "#050B14" : "")"
+                        disabled="@slot.IsFull"
                         @onclick="() => SelectTime(slot)">
                     @Formatter.FormatTime(slot.Time)
                     @if (slot.IsFull)
@@ -127,9 +157,11 @@
                 </button>
             }
         </div>
+    </div>
 
+    <div class="step-content" style="@(CurrentStep >= 3 ? "" : "opacity: 0.4; pointer-events: none;")">
         <div class="section-header-book" style="margin-top: 20px;">
-            <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">INVITE PLAYERS</span>
+            <span class="section-eyebrow" style="color: #22D3EE; text-transform: uppercase; letter-spacing: 1px; display: block;">INVITE PLAYERS</span>
         </div>
         <div class="invite-players">
             <div class="game-players">
@@ -139,30 +171,14 @@
                             <div class="avatar-book avatar-2">B</div>
                             <div class="avatar-book avatar-3">A</div>
                             <div class="avatar-book avatar-4">S</div>
-                            <!-- Add Player Button -->
                             <button class="add-player-btn">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g id="SVGRepo_iconCarrier">
-        <!-- Plus sign untuk menambah player -->
-        <path d="M17 10H20M23 10H20M20 10V7M20 10V13" 
-              stroke="gray" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round"/>
-        <!-- Icon user/profile -->
-        <path d="M1 20V19C1 15.134 4.13401 12 8 12V12C11.866 12 15 15.134 15 19V20" 
-              stroke="gray" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round"/>
-        <!-- Lingkaran kepala user -->
-        <path d="M8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12Z" 
-              stroke="gray" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round"/>
-    </g>
-</svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M17 10H20M23 10H20M20 10V7M20 10V13" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M1 20V19C1 15.134 4.13401 12 8 12V12C11.866 12 15 15.134 15 19V20" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12Z" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </g>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -172,7 +188,7 @@
 
         <div class="summary-card">
             <div class="section-header-book">
-                <span class="section-eyebrow" style="color: #22D3EE;text-transform: uppercase;letter-spacing: 1px;display: block;">BOOKING SUMMARY</span>
+                <span class="section-eyebrow" style="color: #22D3EE; text-transform: uppercase; letter-spacing: 1px; display: block;">BOOKING SUMMARY</span>
             </div>
             <div class="summary-row">
                 <span class="summary-label">Court</span>
@@ -180,11 +196,11 @@
             </div>
             <div class="summary-row">
                 <span class="summary-label">Date</span>
-                <span class="summary-value">@SelectedDate.DayOfWeek, @Formatter.FormatDate(SelectedDate)</span>
+                <span class="summary-value">@SelectedDate.ToString("ddd", CultureInfo.InvariantCulture), @Formatter.FormatDate(SelectedDate)</span>
             </div>
             <div class="summary-row">
                 <span class="summary-label">Time</span>
-                <span class="summary-value">@(SelectedTime != null ? Formatter.FormatTime(SelectedTime.Time) : "19:00")</span>
+                <span class="summary-value">@(SelectedTime != null ? Formatter.FormatTime(SelectedTime.Time) : "—")</span>
             </div>
             <div class="summary-row">
                 <span class="summary-label">Duration</span>
@@ -196,7 +212,9 @@
             </div>
         </div>
 
-        <button class="confirm-btn" @onclick="ConfirmBooking">
+        <button class="confirm-btn @(CurrentStep == 3 ? "active" : "disabled")" 
+                @onclick="ConfirmBooking"
+                disabled="@(CurrentStep < 3)">
             Confirm & Pay @Formatter.FormatCurrency(GetTotalPrice())
         </button>
     </div>
@@ -236,100 +254,142 @@
             </div>
         </div>
     }
-
 </div>
 
 @code {
-    [Parameter] public EventCallback<string> OnNavigate { get; set; }
     private string _color = "";
-    private int CurrentStep = 3;
+    private int CurrentStep = 0;
     private Court? SelectedCourt;
     private DateTime SelectedDate = DateTime.Today;
-    private int SelectedDuration = 60;
+    private int SelectedDuration = 0;
     private TimeSlot? SelectedTime;
     private bool IsConfirmed = false;
+
     protected override void OnInitialized()
     {
-        SelectCourt(SelectedCourt);
+        base.OnInitialized();
+        SelectedCourt = new Court();
+        SelectedDate = new DateTime();
+        SelectedTime = new TimeSlot();
     }
+
     private void SelectCourt(Court court)
     {
-        var _getWeek = GetWeekDays().Where(c => c._date.Day == 8).Select(p => p._date).FirstOrDefault();
-        SelectedCourt = Data.CourtsPage.Where(c => c.Id == 1).FirstOrDefault();
-        SelectedDate = _getWeek;
-        SelectedTime = new TimeSlot();
-        SelectedTime.Time = new TimeSpan(19, 0, 0);
+        SelectedCourt = court;
+        CheckStep1Complete();
+        StateHasChanged();
     }
+
+    private void SelectDate(DateTime date)
+    {
+        SelectedDate = date;
+        CheckStep2Complete();
+        StateHasChanged();
+    }
+
+    private void SelectDuration(int _duration)
+    {
+        SelectedDuration = _duration;
+        CheckStep3Complete();
+        StateHasChanged();
+    }
+
     private void SelectTime(TimeSlot slot)
     {
-        if (!slot.IsFull) SelectedTime = slot;
+        if (!slot.IsFull) 
+        {
+            SelectedTime = slot;
+            CheckStep3Complete();
+            StateHasChanged();
+        }
+    }
+
+    private void CheckStep1Complete()
+    {
+        if (SelectedCourt != new Court()) CurrentStep = 1;
+        StateHasChanged();
+    }
+
+    private void CheckStep2Complete()
+    {
+        if (SelectedDate != DateTime.MinValue && SelectedTime != null)
+        {
+            CurrentStep = 2;
+        }
+        StateHasChanged();
+    }
+
+    private void CheckStep3Complete()
+    {
+        if (SelectedTime != null && SelectedDate != DateTime.MinValue)
+        {
+            CurrentStep = 3;
+        }
+        StateHasChanged();
     }
 
     private decimal GetTotalPrice()
     {
-        SelectedCourt = Data.CourtsPage.Where(c => c.Id == 1).FirstOrDefault();
-        if (SelectedCourt == null) return 0;
-        return SelectedDuration == 60 
-            ? SelectedCourt.Price 
-            : Math.Round(SelectedCourt.Price * 1.35m);
+        SelectedCourt ??= Data.CourtsPage.OrderBy(c => c.Id).FirstOrDefault();
+        if (SelectedCourt == null)  return 0;
+        return SelectedDuration == 60
+            ? SelectedCourt.Price
+            : Math.Round((SelectedCourt.Price / 60) * SelectedDuration);
     }
 
     private void ConfirmBooking()
     {
-        IsConfirmed = true;
+        if (CurrentStep == 3)
+        {
+            IsConfirmed = true;
+            StateHasChanged();
+        }
     }
+
     private void ResetBooking()
     {
         CurrentStep = 0;
-        SelectedCourt = null;
-        SelectedTime = null;
+        SelectedCourt = new Court();
+        SelectedTime = new TimeSlot();
         IsConfirmed = false;
+        SelectedDuration = 0;
+        StateHasChanged();
     }
-    private void NavigateHome()
-    {
-        NavState.NavigateTo("home");
-    }
+
     private void NavigateBack()
     {
-        NavState.NavigateTo("courts");
-    }
-    private void NavigateToBook()
-    {
-        NavState.NavigateTo("book");
+        if (CurrentStep == 1)
+        {
+            CurrentStep--;
+        }
+        else
+        {
+            NavState.NavigateTo("courts");
+        }
+        StateHasChanged();
     }
 
     private void NavigateMyGames()
     {
         NavState.NavigateTo("mygames");
     }
+
     private bool HasAvailableSlots(DateTime date)
     {
-        date = date.AddDays(8);
-        return date.DayOfWeek != DayOfWeek.Sunday;
+        return date.DayOfWeek != DayOfWeek.Sunday && date.DayOfWeek != DayOfWeek.Saturday;
     }
 
     private List<(DateTime _date, string _dayName)> GetWeekDays()
     {
-        var _startDate = new DateTime(DateTime.Today.Year, 6, 8);
+        var _startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 8);
         var _days = new List<(DateTime Date, string DayName)>();
-        for (int i = 0; i < GetEnglishDayName().Count; i++)
+        var dayNames = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+        for (int i = 0; i < dayNames.Length; i++)
         {
             var _date = _startDate.AddDays(i);
-            _days.Add((_date, GetEnglishDayName()[i]));
+            _days.Add((_date, dayNames[i]));
         }
         return _days;
-    }
-    private DateTime GetWeekList()
-    {
-        var today = DateTime.Today;
-        int daysUntilMonday = ((int)today.DayOfWeek - (int)DayOfWeek.Monday + 7) % 7;
-        return today.AddDays(-daysUntilMonday);
-    }
-    private List<string> GetEnglishDayName()
-    {
-        var _addDays = new List<string>();
-        _addDays.AddRange("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
-        return _addDays;
     }
 
     private List<TimeSlot> GetTimeSlots()
@@ -337,27 +397,26 @@
         var slots = new List<TimeSlot>();
         var start = new TimeSpan(9, 0, 0);
         var end = new TimeSpan(20, 0, 0);
+        var _decliendTime = new List<TimeSpan> {
+                new TimeSpan(10, 0, 0),
+                new TimeSpan(12, 0, 0),
+                new TimeSpan(15, 0, 0),
+                new TimeSpan(18, 0, 0)
+            };
 
         for (var time = start; time <= end; time = time.Add(TimeSpan.FromMinutes(60)))
         {
-            var _decliendTime = new List<TimeSpan>() { new TimeSpan(10, 0, 0), new TimeSpan(12, 0, 0), new TimeSpan(15, 0, 0), new TimeSpan(18, 0, 0) };
             var _isFull = _decliendTime.Contains(time);
             slots.Add(new TimeSlot
             {
                 Time = time,
                 IsFull = _isFull,
-                IsSelected = SelectedTime?.Time == time
+                IsSelected = SelectedTime?.Time == time ? true : false
             });
         }
-        
         return slots;
     }
-    
-    private List<string> GetPlayers()
-    {
-        return new List<string> { "B", "A", "S" };
-    }
-    
+
     private class TimeSlot
     {
         public TimeSpan Time { get; set; }
